@@ -1,0 +1,27 @@
+{
+    "name": "bobdenotter/griedfield",
+    "description": "A description about your extension should go here.",
+    "type": "bolt-extension",
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bob den Otter", 
+            "email": "bob@twokings.nl"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\BobdenOtter\\GridField\\": ""
+        }
+    },
+    
+    "extra": {
+        "bolt-assets": "assets"
+    }
+}

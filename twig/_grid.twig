@@ -1,0 +1,56 @@
+{#=== Options ============================================================================#}
+
+{% set attr_opt = {
+    class:        field.class|default(''),
+    name_id:      key,
+    required:     field.required|default(false),
+    readonly:     field.readonly|default(false)
+}%}
+
+{% if context.content.get(key) is empty or context.content.get(key) is not json %}
+    {% set currentvalue = '[]' %}
+{% else %}
+    {% set currentvalue = context.content.get(key) %}
+{% endif %}
+
+{#=== FIELDSET ============================================================================#}
+
+<fieldset class="colourpicker">
+    <div class="col-sm-12">
+        <div>
+            <label class="control-label">{{field.label|default(key)}}</label>
+        </div>
+
+<div id="hot" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;'></div>
+<script>
+jQuery(document).ready(function($) {
+
+  var data = {{ currentvalue|raw }};
+
+  var container = document.getElementById('hot');
+  var hot = new Handsontable(container,
+    {
+        autoColumnSize: true,
+        minSpareRows: 1,
+        width: '100%',
+        height: {{ field.height|default(100) }},
+        minCols: {{ field.columns|length|default(5) }},
+        {% if currentvalue != '[]' %}data: data,{% endif %}
+        colHeaders: [ '{{ field.columns|join("', '")|raw }}' ],
+        contextMenu: true,
+        manualColumnResize: true,
+        afterRender: function(changes, source) {
+            var data = this.getData();
+            data = data.filter(function(row) { 
+                return !_.isEmpty(_.without(row, null));
+            });
+            jQuery('#gridfield-{{key}}').val(JSON.stringify(data));
+        }
+    });
+
+
+});
+</script>
+        <input type="hidden" name="{{key}}" id="gridfield-{{key}}" value="{{ currentvalue }}">
+    </div>
+</fieldset>

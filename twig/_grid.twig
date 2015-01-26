@@ -21,13 +21,13 @@
             <label class="control-label">{{field.label|default(key)}}</label>
         </div>
 
-<div id="hot" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;'></div>
+<div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;'></div>
 <script>
 jQuery(document).ready(function($) {
 
   var data = {{ currentvalue|raw }};
 
-  var container = document.getElementById('hot');
+  var container = document.getElementById('hot-{{key}}');
   var hot = new Handsontable(container,
     {
         autoColumnSize: true,

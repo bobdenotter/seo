@@ -22,9 +22,11 @@ class Extension extends BaseExtension
     }
 
     public function initialize() {
-        $this->addCss('assets/handsontable.full.min.css');
-        $this->addJavascript('assets/handsontable.full.min.js', true);
-        $this->addJavascript('assets/start.js', true);
+        if ($this->app['config']->getWhichEnd()=='backend') {
+            $this->addCss('assets/handsontable.full.min.css');
+            $this->addJavascript('assets/handsontable.full.min.js', true);
+            $this->addJavascript('assets/start.js', true);
+        }
     }
 
     public function getName()

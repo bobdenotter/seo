@@ -8,7 +8,7 @@
 }%}
 
 {% if context.content.get(key) is empty or context.content.get(key) is not json %}
-    {% set currentvalue = '[]' %}
+    {% set currentvalue = '[[]]' %}
 {% else %}
     {% set currentvalue = context.content.get(key) %}
 {% endif %}
@@ -21,7 +21,7 @@
             <label class="control-label">{{field.label|default(key)}}</label>
         </div>
 
-<div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;'></div>
+<div id="hot-{{key}}" style='width: 100%; border-right: 1px solid #DDD; border-bottom: 1px solid #DDD; background-color: #F8F8F8;z-index: 1;'></div>
 <script>
 jQuery(document).ready(function($) {
 
@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
         width: '100%',
         height: {{ field.height|default(100) }},
         minCols: {{ field.columns|length|default(5) }},
-        {% if currentvalue != '[]' %}data: data,{% endif %}
+        data: data,
         colHeaders: [ '{{ field.columns|join("', '")|raw }}' ],
         contextMenu: true,
         manualColumnResize: true,

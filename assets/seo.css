@@ -1,0 +1,37 @@
+
+div#seosnippet {
+    font-family: arial, sans-serif;
+    font-weight: normal;
+    font-size: 13px;    
+    line-height: 18px;
+}
+
+div#seosnippet span.title {
+    color: #1a0dab;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+div#seosnippet span.title:hover {
+    text-decoration: underline
+}
+
+div#seosnippet cite {
+    color: #006621;
+    display: block;
+    font-size: 14px;
+    line-height: 18px;    
+}
+
+div#seosnippet div.excerpt {
+    color: #555;
+    max-width: 508px;
+}
+
+div#seosnippet div.footer a {
+    color: #1a0dab;
+    cursor: pointer;
+    font-weight: normal;
+}
+

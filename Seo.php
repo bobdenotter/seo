@@ -1,6 +1,6 @@
 <?php
 
-namespace Bolt\Extension\BobdenOtter\GridField;
+namespace Bolt\Extension\BobdenOtter\Seo;
 
 use Bolt\Field\FieldInterface;
 
@@ -9,12 +9,12 @@ class GridField implements FieldInterface
 
     public function getName()
     {
-        return 'grid';
+        return 'seo';
     }
 
     public function getTemplate()
     {
-        return '_grid.twig';
+        return '_seo.twig';
     }
 
     public function getStorageType()

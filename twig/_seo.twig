@@ -1,0 +1,188 @@
+{#=== Options ============================================================================#}
+
+{% set attr_opt = {
+    class:        field.class|default(''),
+    name_id:      key,
+    required:     field.required|default(false),
+    readonly:     field.readonly|default(false)
+}%}
+
+{% if context.content.get(key) is empty or context.content.get(key) is not json %}
+    {% set currentvalue = '[[]]' %}
+{% else %}
+    {% set currentvalue = context.content.get(key) %}
+{% endif %}
+
+{# titlepostfix #}
+{% set titlepostfix = ' ' ~ seoconfig.title_separator|default('-') ~ ' ' 
+    ~ seoconfig.title_postfix|default(app.config.get('general/sitename')) %}
+
+{# titlefield #}
+{% set titlefield = "" %}
+{% for field in seoconfig.fields.title %}
+    {% if titlefield is empty and field in context.contenttype.fields|keys %}
+      {% set titlefield = field %}
+    {% endif %}
+{% endfor %}
+
+{# descriptionfield #}
+{% set descriptionfield = "" %}
+{% for field in seoconfig.fields.description %}
+    {% if descriptionfield is empty and field in context.contenttype.fields|keys %}
+      {% set descriptionfield = field %}
+    {% endif %}
+{% endfor %}
+
+{% set seovalues = context.content[key]|default('')|json_decode %}
+{% set title_length = seoconfig.title_length|default(70) %}
+{% set description_length = seoconfig.description_length|default(156) %}
+
+{#=== FIELDSET ============================================================================#}
+
+
+    <div class="col-sm-12">
+        <h3>SEO options</h3>
+    </div>
+        
+    {# Seo Google Snippet Preview #}
+    <div class="col-sm-12">
+        <label class="control-label">Google snippet preview:</label>
+        <div id="seosnippet">
+            <span class="title">Bolt SEO Extension</span>
+            <cite>...</cite>
+            <div class="excerpt">...</div>
+            <div class="footer">‎<a href='#'>Sitelink 1</a> - <a href='#'>‎Sitelink 2</a> - ‎<a href='#'>Sitelink 3</a></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group">
+
+    {# Seo Title #}
+    <fieldset>
+        <label class="col-sm-2 control-label">SEO Title</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="seofields-title" maxlength="255" type="text" value="{{ seovalues.title|default('') }}">
+        </div>
+    </fieldset>
+
+    <div class="postfix" style="margin-top: 8px;">
+        <p>Will be used as the <tt>&lt;title&gt;</tt> and in search engines. Limit the length to 70 characters.</p>
+    </div>
+         
+    {# Meta description #}   
+    <fieldset>
+        <div class="col-sm-12">
+            <label class="control-label">Meta description</label>
+            <textarea class="form-control" id="seofields-metadescription" style="height: 80px;">{{ seovalues.metadescription|default('') }}</textarea>
+        </div>
+    </fieldset>
+
+    <div class="postfix">
+        <p>Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up 
+          in search engines. Limit the length to 156 characters.</p>
+    </div>
+
+    {# Shortlink #}
+    <fieldset>
+        <label class="col-sm-3 control-label">Shortlink (alias)</label>
+        <div class="col-sm-9">
+            <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
+        </div>
+    </fieldset>
+
+    <div class="postfix" style="margin-top: 8px;">
+        <p>Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>.</p>
+    </div>
+
+    {# Canonical link #}
+    <fieldset>
+        <label class="col-sm-3 control-label">Canonical Link</label>
+        <div class="col-sm-9">
+            <input class="form-control narrow" id="seofields-canonical" maxlength="255" type="text" value="{{ seovalues.canonical|default('') }}">
+        </div>
+    </fieldset>
+
+    <div class="postfix" style="margin-top: 8px;">
+        <p>Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>. Use with caution, and only if you know what you're doing.</p>
+    </div>
+
+
+    <input type="hidden" name="{{key}}" id="{{key}}" value="{{ currentvalue }}">
+
+    <script>
+    jQuery(document).ready(function($) {
+
+        var SeoExtension = Backbone.Model.extend({
+
+            initialize: function () {
+
+                this.titlepostfix = "{{ titlepostfix }}";
+                this.titlefield = "{{ titlefield }}";
+                this.descriptionfield = "{{ descriptionfield }}";
+                this.hostname = "{{ app.paths.rooturl ~ context.contenttype.singular_slug ~ "/" }}";
+
+                this.update();
+
+                $('#seofields-title, #seofields-metadescription').on('keyup input paste', function(){
+                    seoExtension.update();
+                })
+
+            },
+
+            update: function() {
+
+                if ($('#seofields-title').val() != "") {
+                  var title = $('#seofields-title').val() + this.titlepostfix;
+                } else {
+                  var title = $('#' + this.titlefield).val() + this.titlepostfix;
+                }
+
+                if ($('#seofields-metadescription').val() != "") {
+                  var description = $('#seofields-metadescription').val();
+                } else {
+                  var description = $('#' + this.descriptionfield).val();
+                }        
+
+                var link = $('#show-slug').text();
+                var shortlink = $('#seofields-shortlink').val();
+                var canonical = $('#seofields-canonical').val();
+
+                $('#seosnippet .title').text( this.trimtext(title, {{70}}) );
+                $('#seosnippet cite').text( this.hostname + link );
+                $('#seosnippet .excerpt').text( this.trimtext(description, 156) );
+
+                var value = { 
+                    'title': $('#seofields-title').val(), 
+                    'description': $('#seofields-metadescription').val(), 
+                    'shortlink': $('#seofields-shortlink').val(), 
+                    'canonical': $('#seofields-canonical').val() }
+
+                $('#{{key}}').val( JSON.stringify(value) );
+
+                window.clearTimeout(this.timer);
+                this.timer = window.setTimeout(function(){ seoExtension.update(); }, 3000);
+
+            },
+
+            strip: function(html) {
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText;
+            },
+
+            trimtext: function(str, length) {
+                str = this.strip(str);
+                return str.length > length ? str.substring(0, length - 1) + '…' : str;
+            }
+
+        });
+
+        var seoExtension = new SeoExtension();
+
+    });
+    </script>
+
+
+

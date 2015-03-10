@@ -7,12 +7,6 @@
     readonly:     field.readonly|default(false)
 }%}
 
-{% if context.content.get(key) is empty or context.content.get(key) is not json %}
-    {% set currentvalue = '[[]]' %}
-{% else %}
-    {% set currentvalue = context.content.get(key) %}
-{% endif %}
-
 {# titlepostfix #}
 {% set titlepostfix = ' ' ~ seoconfig.title_separator|default('-') ~ ' ' 
     ~ seoconfig.title_postfix|default(app.config.get('general/sitename')) %}
@@ -75,7 +69,7 @@
     <fieldset>
         <div class="col-sm-12">
             <label class="control-label">Meta description</label>
-            <textarea class="form-control" id="seofields-metadescription" style="height: 80px;">{{ seovalues.metadescription|default('') }}</textarea>
+            <textarea class="form-control" id="seofields-description" style="height: 80px;">{{ seovalues.description|default('') }}</textarea>
         </div>
     </fieldset>
 
@@ -125,7 +119,7 @@
 
                 this.update();
 
-                $('#seofields-title, #seofields-metadescription').on('keyup input paste', function(){
+                $('#seofields-title, #seofields-description').on('keyup input paste', function(){
                     seoExtension.update();
                 })
 
@@ -139,8 +133,8 @@
                   var title = $('#' + this.titlefield).val() + this.titlepostfix;
                 }
 
-                if ($('#seofields-metadescription').val() != "") {
-                  var description = $('#seofields-metadescription').val();
+                if ($('#seofields-description').val() != "") {
+                  var description = $('#seofields-description').val();
                 } else {
                   var description = $('#' + this.descriptionfield).val();
                 }        
@@ -155,7 +149,7 @@
 
                 var value = { 
                     'title': $('#seofields-title').val(), 
-                    'description': $('#seofields-metadescription').val(), 
+                    'description': $('#seofields-description').val(), 
                     'shortlink': $('#seofields-shortlink').val(), 
                     'canonical': $('#seofields-canonical').val() }
 

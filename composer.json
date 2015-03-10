@@ -1,6 +1,6 @@
 {
     "name": "bobdenotter/seo",
-    "description": "A description about your extension should go here.",
+    "description": "An extension to easily manage SEO title, meta description and OG tags.",
     "type": "bolt-extension",
     "require": {
         "bolt/bolt": ">=2.0.0,<3.0.0"
@@ -17,7 +17,7 @@
             "init.php"
         ],
         "psr-4": {
-            "Bolt\\Extension\\BobdenOtter\\GridField\\": ""
+            "Bolt\\Extension\\BobdenOtter\\Seo\\": ""
         }
     },
     

@@ -1,3 +1,16 @@
 
+# The separator int the title: "Lorum ipsum | My website name"
 title_separator: "|"
-title_postfix: "Whoop SEO!!"
+
+# The postfix to append to titles. Leave this blank to use the 'sitename' from config.yml
+title_postfix: ""
+
+# The length used for the title and meta description. Note that increasing these values 
+# this will _not_ make them appear as longer snippets in Google. 
+title_length: 70
+description_length: 156
+
+# Default values to consider for the title and meta description
+fields:
+    title: ['title', 'name']
+    description: ['introduction', 'teaser', 'description', 'body']

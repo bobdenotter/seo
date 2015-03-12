@@ -14,6 +14,7 @@ To use this extension, you should add a field to your contenttypes, and add the 
 
 In your contenttypes, you should add a single `seo` field. The extenion will use this to store the data for the different fields that show in the backend when editing a record. Simply add it to your fields like this; 
 
+```
  pages:
     name: Pages
     singular_name: Page
@@ -21,6 +22,7 @@ In your contenttypes, you should add a single `seo` field. The extenion will use
         [..]
         seo: 
         type: seo
+```
 
 You can assign the fields their own tab, using the `group: SEO options`, to keep them organised in the backend. 
 

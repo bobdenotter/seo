@@ -21,10 +21,10 @@ In your contenttypes, you should add a single `seo` field. The extenion will use
     fields:
         [..]
         seo: 
-        type: seo
+            type: seo
 ```
 
-You can assign the fields their own tab, using the `group: SEO options`, to keep them organised in the backend. 
+You can assign the fields their own tab, using the `group: 'SEO options'`, to keep them organised in the backend. 
 
 To add the SEO title and Meta tags to your HTML, edit your templates (the 'master' or 'header') to have the following:
 

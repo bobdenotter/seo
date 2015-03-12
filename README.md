@@ -7,12 +7,12 @@ The Bolt SEO extension is an extension to help you improve the search engine ind
  - Adding meta tags to your HTML to facilitate indexing of your pages using meta tags and OG tags.
  - Override the canonical, if you really want to. 
 
- Setup
- -----
+Setup
+-----
 
- To use this extension, you should add a field to your contenttypes, and add the tags to the header of your HMTL templates.
+To use this extension, you should add a field to your contenttypes, and add the tags to the header of your HMTL templates.
 
- In your contenttypes, you should add a single `seo` field. The extenion will use this to store the data for the different fields that show in the backend when editing a record. Simply add it to your fields like this; 
+In your contenttypes, you should add a single `seo` field. The extenion will use this to store the data for the different fields that show in the backend when editing a record. Simply add it to your fields like this; 
 
  pages:
     name: Pages

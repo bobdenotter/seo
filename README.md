@@ -30,7 +30,7 @@ To add the SEO title and Meta tags to your HTML, edit your templates (the 'maste
 
 ```HTML
     <title>{{ seo('title') }}</title>
-    {{ seo('metatags' )}}
+    {{ seo('metatags') }}
 ```
 
 When you've done this, all pages tha make use of these templates will automatically have the correct `<title>` tag and the meta- and OG-tags. 

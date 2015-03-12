@@ -1,9 +1,15 @@
-    <meta name="description" content="{{ description }}"/>
-    <meta property="og:locale" content="{{ htmllang() }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ title }}" />
-    <meta property="og:description" content="{{ description }}" />
-    <meta property="og:url" content="{{ paths.canonicalurl }}" />
-    <meta property="og:site_name" content="{{ app.config.get('general/sitename') }}" />
-    <meta property="og:image" content="{{ image }}" /> 
-
+{% if description is not empty %}
+<meta name="description" content="{{ description }}"/>
+{% endif %}
+        <meta property="og:locale" content="{{ htmllang() }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ title }}" />
+{% if description is not empty %}
+        <meta property="og:description" content="{{ description }}" />
+{% endif %}
+        <meta property="og:url" content="{{ paths.canonicalurl }}" />
+        <meta property="og:site_name" content="{{ app.config.get('general/sitename') }}" />
+{% if image is not empty %}
+        <meta property="og:image" content="{{ image }}" />
+{% endif %}
+        <!-- This site is being optimized with the Bob Bolt SEO Premium Extension™ {{ version }} Platinum Edition Pro. -->

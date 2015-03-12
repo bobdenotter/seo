@@ -11,6 +11,7 @@ require_once('Seo.php');
 class Extension extends BaseExtension
 {
 
+    private $version = "v0.1.0";
 
     public function __construct(Application $app)
     {
@@ -46,37 +47,52 @@ class Extension extends BaseExtension
         // Make sure $record contains something sensible.
         if (empty($record)) {
             if (empty($this->record)) {
+                // See if we can get it from the global twig variables
                 $vars = $this->app['twig']->getGlobals();
-                $record = $this->record = $vars['record'];
+                if (isset($vars['record'])) {
+                    $record = $this->record = $vars['record'];
+                }
             } else {
                 $record = $this->record;
             }
         }
 
-        // dump($record->contenttype);
-
         // Find the seofield and the fallback fields for description and title
         $seofieldname = "";
         $titlefield = "";
         $descriptionfield = "";
+        $seovalues = array();
 
-        foreach($record->contenttype['fields'] as $fieldname => $field) {
-            if ($field['type'] == "seo") {
-                $seofieldname = $fieldname;
+        if (!empty($record)) {
+            foreach($record->contenttype['fields'] as $fieldname => $field) {
+                if ($field['type'] == "seo") {
+                    $seofieldname = $fieldname;
+                }
+                if (($titlefield == "") && in_array($fieldname, $this->config['fields']['title']) ) {
+                    $titlefield = $fieldname;
+                }
+                if (($descriptionfield == "") && in_array($fieldname, $this->config['fields']['description']) ) {
+                    $descriptionfield = $fieldname;
+                }
             }
-            if (($titlefield == "") && in_array($fieldname, $this->config['fields']['title']) ) {
-                $titlefield = $fieldname;
+        } else {
+            // If we get here, no record is set, we're _not_ on the homepage (or it's not set)
+            // In this case we fall back to the defaults set in our config, or the global
+            if (!empty($this->config['default']['title'])) {
+                $seovalues['title'] = $this->config['default']['title'];
+            } else {
+                $seovalues['title'] = $this->app['config']->get('general/sitename');
             }
-            if (($descriptionfield == "") && in_array($fieldname, $this->config['fields']['description']) ) {
-                $descriptionfield = $fieldname;
-            }
+            if (!empty($this->config['default']['description'])) {
+                $seovalues['description'] = $this->config['default']['description'];
+            } else {
+                $seovalues['description'] = $this->app['config']->get('general/payoff');
+            }            
+        }      
+
+        if (!empty($seofieldname)) {
+            $seovalues = json_decode($record->values[$seofieldname], true);
         }
-
-        if (empty($seofieldname)) {
-            return "<!-- no SEO field found. -->";
-        }
-
-        $seovalues = json_decode($record->values[$seofieldname]);
 
         switch($what) {
             case 'title':
@@ -102,8 +118,8 @@ class Extension extends BaseExtension
             !empty($this->config['title_postfix']) ? $this->config['title_postfix'] : $this->app['config']->get('general/sitename')
         );
 
-        if (!empty($seovalues->title)) {
-            $title = $seovalues->title . $postfix;
+        if (!empty($seovalues['title'])) {
+            $title = $seovalues['title'] . $postfix;
         } else {
             $title = $record->values[$titlefield] . $postfix;
         }
@@ -118,8 +134,8 @@ class Extension extends BaseExtension
     private function seoDescription($record, $seovalues, $descriptionfield)
     {
 
-        if (!empty($seovalues->description)) {
-            $description = $seovalues->description;
+        if (!empty($seovalues['description'])) {
+            $description = $seovalues['description'];
         } else {
             $description = $record->values[$descriptionfield];
         }
@@ -136,7 +152,8 @@ class Extension extends BaseExtension
         $vars = array(
             'title' => $this->seoTitle($record, $seovalues, $titlefield),
             'description' => $this->seoDescription($record, $seovalues, $descriptionfield),
-            'image' => $this->findImage($record)
+            'image' => $this->findImage($record),
+            'version' => $this->version
         );
 
         $html = $this->app['render']->render('_metatags.twig', $vars);
@@ -148,10 +165,17 @@ class Extension extends BaseExtension
 
     private function findImage($record) 
     {
+        if (empty($record)) {
+            return "";
+        }
 
         foreach($record->contenttype['fields'] as $fieldname => $field) {
             if ($field['type'] == "image") {
-                $image = $record->values[$fieldname]['file'];
+                if (isset($record->values[$fieldname]['file'])) {
+                    $image = $record->values[$fieldname]['file'];
+                } else {
+                    $image = $record->values[$fieldname];
+                }
                 break;
             }
         }

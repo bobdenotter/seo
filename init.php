@@ -1,5 +1,5 @@
 <?php
 
-namespace Bolt\Extension\BobdenOtter\Seo;
+use Bolt\Extension\BobdenOtter\Seo\Extension;
 
 $app['extensions']->register(new Extension($app));

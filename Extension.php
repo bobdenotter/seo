@@ -87,8 +87,8 @@ class Extension extends BaseExtension
                 $seovalues['description'] = $this->config['default']['description'];
             } else {
                 $seovalues['description'] = $this->app['config']->get('general/payoff');
-            }            
-        }      
+            }
+        }
 
         if (!empty($seofieldname)) {
             $seovalues = json_decode($record->values[$seofieldname], true);
@@ -103,7 +103,7 @@ class Extension extends BaseExtension
                 break;
             case 'metatags':
                 return $this->seoMetaTags($record, $seovalues, $titlefield, $descriptionfield);
-                break;                
+                break;
         }
 
         return '';
@@ -163,7 +163,7 @@ class Extension extends BaseExtension
     }
 
 
-    private function findImage($record) 
+    private function findImage($record)
     {
         if (empty($record)) {
             return "";
@@ -187,7 +187,7 @@ class Extension extends BaseExtension
                 $image
             );
 
-            return $image; 
+            return $image;
 
         } else {
 

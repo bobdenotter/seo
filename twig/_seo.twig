@@ -35,7 +35,7 @@
 
     {# Seo Title #}
     <fieldset>
-        <label class="col-sm-2 control-label">SEO Title</label>
+        <label class="col-sm-2 control-label">SEO Title:</label>
         <div class="col-sm-10">
             <input class="form-control" id="seofields-title" maxlength="255" type="text" value="{{ seovalues.title|default('') }}">
         </div>
@@ -48,7 +48,7 @@
     {# Meta description #}
     <fieldset>
         <div class="col-sm-12">
-            <label class="control-label">Meta description</label>
+            <label class="control-label">Meta description:</label>
             <textarea class="form-control" id="seofields-description" style="height: 80px;">{{ seovalues.description|default('') }}</textarea>
         </div>
     </fieldset>
@@ -75,7 +75,7 @@
 
     {# Shortlink #}
     <fieldset>
-        <label class="col-sm-3 control-label">Shortlink (alias)</label>
+        <label class="col-sm-3 control-label">Shortlink (alias):</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
         </div>
@@ -87,7 +87,7 @@
 
     {# Canonical link #}
     <fieldset>
-        <label class="col-sm-3 control-label">Canonical Link</label>
+        <label class="col-sm-3 control-label">Canonical Link:</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-canonical" maxlength="255" type="text" value="{{ seovalues.canonical|default('') }}">
         </div>

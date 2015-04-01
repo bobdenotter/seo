@@ -4,7 +4,7 @@ namespace Bolt\Extension\BobdenOtter\Seo;
 
 use Bolt\Field\FieldInterface;
 
-class GridField implements FieldInterface
+class SEOField implements FieldInterface
 {
 
     public function getName()

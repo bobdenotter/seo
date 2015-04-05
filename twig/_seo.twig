@@ -31,11 +31,16 @@
 {% set title_length = seoconfig.title_length|default(70) %}
 {% set description_length = seoconfig.description_length|default(156) %}
 
+{% if seovalues.meta_robots is not defined %}
+    {% set seovalues = seovalues|merge({'meta_robots': seoconfig.meta_robots|default("index, follow")})  %}
+{% endif %}
+
+
 {#=== FIELDSET ============================================================================#}
 
     {# Seo Title #}
     <fieldset>
-        <label class="col-sm-2 control-label">SEO Title:</label>
+        <label for="seofields-title" class="col-sm-2 control-label">SEO Title:</label>
         <div class="col-sm-10">
             <input class="form-control" id="seofields-title" maxlength="255" type="text" value="{{ seovalues.title|default('') }}">
         </div>
@@ -48,7 +53,7 @@
     {# Meta description #}
     <fieldset>
         <div class="col-sm-12">
-            <label class="control-label">Meta description:</label>
+            <label for="seofields-description" class="control-label">Meta description:</label>
             <textarea class="form-control" id="seofields-description" style="height: 80px;">{{ seovalues.description|default('') }}</textarea>
         </div>
     </fieldset>
@@ -75,7 +80,7 @@
 
     {# Shortlink #}
     <fieldset>
-        <label class="col-sm-3 control-label">Shortlink (alias):</label>
+        <label for="seofields-shortlink" class="col-sm-3 control-label">Shortlink (alias):</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
         </div>
@@ -87,7 +92,7 @@
 
     {# Canonical link #}
     <fieldset>
-        <label class="col-sm-3 control-label">Canonical Link:</label>
+        <label for="seofields-canonical" class="col-sm-3 control-label">Canonical Link:</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-canonical" maxlength="255" type="text" value="{{ seovalues.canonical|default('') }}">
         </div>
@@ -95,6 +100,22 @@
 
     <div class="postfix" style="margin-top: 8px;">
         <p>Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>. Use with caution, and only if you know what you're doing.</p>
+    </div>
+
+
+    <fieldset>
+        <label for="seofields-robots" class="col-sm-3 control-label">Meta Robots Tag:</label>
+        <div class="col-sm-9">
+            <select id="seofields-robots" class="narrow form-control pull-left">
+            {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow' ] %}
+                <option value="{{ option }}" {% if seovalues.meta_robots == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </fieldset>
+
+    <div class="postfix" style="margin-top: 8px;">
+        <p>Use this to set the <tt>&lt;meta name="robots"&gt;</tt>. Use with caution, and only if you know what you're doing.</p>
     </div>
 
     <input type="hidden" name="{{key}}" id="{{key}}" value="">
@@ -136,6 +157,7 @@
                 var link = $('#show-slug').text();
                 var shortlink = $('#seofields-shortlink').val();
                 var canonical = $('#seofields-canonical').val();
+                var robots = $('#seofields-robots').val();
 
                 $('#seosnippet .title').text( this.trimtext(title, {{70}}) );
                 $('#seosnippet cite').text( this.hostname + link );
@@ -145,7 +167,8 @@
                     'title': $('#seofields-title').val(),
                     'description': $('#seofields-description').val(),
                     'shortlink': $('#seofields-shortlink').val(),
-                    'canonical': $('#seofields-canonical').val() }
+                    'canonical': $('#seofields-canonical').val(),
+                    'robots': $('#seofields-robots').val() }
 
                 $('#{{key}}').val( JSON.stringify(value) );
 

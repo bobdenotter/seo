@@ -20,3 +20,13 @@ fields:
 default:
     title: ""
     description: ""
+
+# The default option for the `<meta name="robots" />` tag. The available options are:
+# - `index, follow` - Index this page, follow the links on this page.
+# - `noindex, follow` - Don't index this page, but follow the links on this page.
+# - `index, nofollow` - Index this page, but don't follow the links on this page.
+# - `noindex, nofollow` - Don't index this page, and don't follow the links on this page.
+# @see: https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag
+meta_robots: "index, follow"
+
+

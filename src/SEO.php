@@ -66,9 +66,18 @@ class SEO
             $this->values['default']['description'] = $this->app['config']->get('general/payoff');
         }
 
+        if (!empty($this->config['meta_robots'])) {
+            $this->values['default']['meta_robots'] = $this->config['meta_robots'];
+        } else {
+            $this->values['default']['meta_robots'] = "index, follow";
+        }
+
         if (!empty($seofieldname)) {
             $this->values['record'] = json_decode($record->values[$seofieldname], true);
         }
+
+        $this->setCanonical();
+
 
     }
 
@@ -115,6 +124,21 @@ class SEO
     }
 
 
+    public function robots($record = null)
+    {
+
+        $this->initialize($record);
+
+        if (!empty($this->values['record']['robots'])) {
+            $description = $this->values['record']['robots'];
+        } else {
+            $description = $this->values['default']['meta_robots'];
+        }
+
+        return Html::trimText(strip_tags($description), $this->config['description_length']);
+
+    }
+
 
     public function metatags($record = null)
     {
@@ -125,7 +149,8 @@ class SEO
             'title' => $this->title(),
             'description' => $this->description(),
             'image' => $this->findImage(),
-            'version' => $this->version
+            'version' => $this->version,
+            'robots' => $this->robots()
         );
 
         $html = $this->app['render']->render('_metatags.twig', $vars);
@@ -158,6 +183,32 @@ class SEO
             return $image;
         } else {
             return '';
+        }
+
+    }
+
+    public function setCanonical()
+    {
+
+        $paths = $this->app['resources']->getPaths();
+
+        if (!empty($this->values['record']['canonical'])) {
+            $canonical = $this->values['record']['canonical'];
+
+            if (strpos($canonical, "http") !== 0) {
+
+                // Relative link, so we add the domain.
+                if (strpos($canonical, "/") !== 0) {
+                    $canonical = "/" . $canonical;
+                }
+                $url = sprintf("%s%s", $paths['canonical'], $canonical);
+                $this->app['resources']->setUrl('canonicalurl', $url);
+
+            } else {
+
+                // Absoloute link, so we don't add the domain.
+                $this->app['resources']->setUrl('canonicalurl', $canonical);
+            }
         }
 
     }

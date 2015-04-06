@@ -8,13 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 class SEO
 {
 
-   public function __construct(\Silex\Application $app, $config, $version)
+    protected $canonicalSet = false;
+
+    public function __construct(\Silex\Application $app, $config, $version)
     {
         $this->app = $app;
         $this->config = $config;
         $this->version = $version;
 
         $this->record = array();
+        $this->values = array();
 
         // $this->initialize(null, true);
 
@@ -37,7 +40,7 @@ class SEO
 
         $titlefield = '';
         $descriptionfield = '';
-        $this->values = array();
+
 
         // Find the seofield and the fallback fields for description and title
         if (!empty($record)) {
@@ -158,7 +161,8 @@ class SEO
             'description' => $this->description(),
             'image' => $this->findImage(),
             'version' => $this->version,
-            'robots' => $this->robots()
+            'robots' => $this->robots(),
+            'canonical' => $this->app['resources']->getUrl('canonicalurl')
         );
 
         $html = $this->app['render']->render('_metatags.twig', $vars);
@@ -199,13 +203,22 @@ class SEO
 
     }
 
-    public function setCanonical()
+    public function setCanonical($canonical = "")
     {
+
+        // If we set it explicitly, don't "reset" it by default.
+        if (empty($canonical) && $this->canonicalSet) {
+            return;
+        }
+        $this->canonicalSet = true;
 
         $paths = $this->app['resources']->getPaths();
 
-        if (!empty($this->values['record']['canonical'])) {
+        if (empty($canonical) && !empty($this->values['record']['canonical'])) {
             $canonical = $this->values['record']['canonical'];
+        }
+
+        if (!empty($canonical)) {
 
             if (strpos($canonical, "http") !== 0) {
 

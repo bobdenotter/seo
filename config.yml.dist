@@ -29,4 +29,8 @@ default:
 # @see: https://developers.google.com/webmasters/control-crawl-index/docs/robots_meta_tag
 meta_robots: "index, follow"
 
+robot_override:
+    contentlisting: "noindex, follow"
+    taxonomylink: "noindex, follow"
+    search: "noindex, follow"
 

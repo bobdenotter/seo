@@ -3,7 +3,7 @@
 namespace Bolt\Extension\BobdenOtter\Seo;
 
 use Bolt\Helpers\Html;
-
+use Symfony\Component\HttpFoundation\Request;
 
 class SEO
 {
@@ -14,13 +14,14 @@ class SEO
         $this->config = $config;
         $this->version = $version;
 
-        $this->initialize();
+        $this->record = array();
+
+        // $this->initialize(null, true);
 
     }
 
     public function initialize($record = null)
     {
-
         // Make sure $record contains something sensible.
         if (empty($record)) {
             if (empty($this->record)) {
@@ -53,6 +54,12 @@ class SEO
             }
         }
 
+        // See if we need to override the route.
+        $route = $this->app['request']->get('_route');
+        if (isset($this->config['robot_override'][$route])) {
+            $this->values['inferred']['meta_robots'] = $this->config['robot_override'][$route];
+        }
+
         // If we need these, no record is set, we're _not_ on the homepage (or it's not set)
         // In this case we fall back to the defaults set in our config, or the global
         if (!empty($this->config['default']['title'])) {
@@ -77,7 +84,6 @@ class SEO
         }
 
         $this->setCanonical();
-
 
     }
 
@@ -130,12 +136,14 @@ class SEO
         $this->initialize($record);
 
         if (!empty($this->values['record']['robots'])) {
-            $description = $this->values['record']['robots'];
+            $robots = $this->values['record']['robots'];
+        } else if (!empty($this->values['inferred']['meta_robots'])) {
+            $robots = $this->values['inferred']['meta_robots'];
         } else {
-            $description = $this->values['default']['meta_robots'];
+            $robots = $this->values['default']['meta_robots'];
         }
 
-        return Html::trimText(strip_tags($description), $this->config['description_length']);
+        return $robots;
 
     }
 
@@ -162,6 +170,10 @@ class SEO
 
     private function findImage()
     {
+
+        if (empty($this->record)) {
+            return '';
+        }
 
         foreach($this->record->contenttype['fields'] as $fieldname => $field) {
             if ($field['type'] == "image") {

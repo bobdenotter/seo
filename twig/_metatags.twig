@@ -7,7 +7,7 @@
 {% if description is not empty %}
         <meta property="og:description" content="{{ description }}" />
 {% endif %}
-        <meta property="og:url" content="{{ paths.canonicalurl }}" />
+        <meta property="og:url" content="{{ canonical }}" />
         <meta property="og:site_name" content="{{ app.config.get('general/sitename') }}" />
 {% if image is not empty %}
         <meta property="og:image" content="{{ image }}" />

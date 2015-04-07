@@ -6,6 +6,7 @@ The Bolt SEO extension is an extension to help you improve the search engine ind
  - Allowing you to specify the SEO title and meta-description for your pages. 
  - Adding meta tags to your HTML to facilitate indexing of your pages using meta tags and OG tags.
  - Override the canonical, if you really want to. 
+ - Set the `<meta name="robots">`-tag.
 
 Setup
 -----
@@ -22,9 +23,10 @@ In your contenttypes, you should add a single `seo` field. The extenion will use
         [..]
         seo: 
             type: seo
+            group: "SEO settings"
 ```
 
-You can assign the fields their own tab, using the `group: 'SEO options'`, to keep them organised in the backend. 
+You can assign the fields their own tab, using the `group: 'SEO settings'`, to keep them organised in the backend. 
 
 To add the SEO title and Meta tags to your HTML, edit your templates (the 'master' or 'header') to have the following:
 

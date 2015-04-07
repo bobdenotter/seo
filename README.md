@@ -29,7 +29,7 @@ You can assign the fields their own tab, using the `group: 'SEO settings'`, to k
 
 After you've done this, it will look like this in the Bolt backend: 
 
-
+![screen shot 2015-04-07 at 09 34 28](https://cloud.githubusercontent.com/assets/1833361/7018813/69096cb8-dd09-11e4-91a9-99188609ed18.png)
 
 To add the SEO title and Meta tags to your HTML, edit your templates (the 'master' or 'header') to have the following:
 

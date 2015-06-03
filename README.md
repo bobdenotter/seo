@@ -51,4 +51,4 @@ the correct `<title>` tag and the meta- and OG-tags.
 This is a new extension, so the functionality is still pretty bare bones. What's there
 works well, but there is probably a lot of functionality to add, to improve search engine
 indexing. If you'd like to contribute, or have a good idea, feel free to open an issue on
-the tracker at the SEO Extension repository on Github.
+the tracker at the [SEO Extension repository](https://github.com/bobdenotter/seo/issues) on Github.

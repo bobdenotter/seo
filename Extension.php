@@ -11,7 +11,7 @@ require_once('src/SEO.php');
 class Extension extends BaseExtension
 {
 
-    private $version = "v0.9.0";
+    private $version = "v0.9.1";
 
     public function __construct(Application $app)
     {
@@ -24,7 +24,15 @@ class Extension extends BaseExtension
         $end = $this->app['config']->getWhichEnd();
 
         if ($end =='backend') {
+            
+            // For Bolt 2.0 - 2.2
             $this->app['htmlsnippets'] = true;
+
+            // For Bolt 2.3 +
+            $this->app->before(function(Request $request){
+                $request->attributes->set('allow_snippets', true);
+            });
+            
             $this->addCss('assets/seo.css');
             // $this->addJavascript('assets/seo.js', true);
         }

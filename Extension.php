@@ -33,6 +33,20 @@ class Extension extends BaseExtension
 
         $this->app['twig.loader.filesystem']->prependPath(__DIR__."/twig");
 
+        $currentUser    = $this->app['users']->getCurrentUser();
+        $currentUserId  = $currentUser['id'];
+        
+        $this->config['allowed'] = array();
+        foreach ($this->config['allow'] as $key => $field) {
+            $this->config["allowed"][$key] = false;
+            foreach ($this->config['allow'][$key] as $role) {
+                if ($this->app['users']->hasRole($currentUserId, $role)) {
+                    $this->config["allowed"][$key] = true;
+                    break;
+                }
+            }
+        } 
+
         $this->app['twig']->addGlobal('seoconfig', $this->config);
 
         if ($end == 'frontend') {

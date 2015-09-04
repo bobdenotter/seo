@@ -21,6 +21,12 @@ default:
     title: ""
     description: ""
 
+# Control who can view the more "scary" fields
+#allow:
+#    shortlink: [ chief-editor, admin, developer, root ]
+#    canonical: [ admin, developer, chief-editor, root ]
+#    robots: [ admin, developer, chief-editor, root ]
+
 # The default option for the `<meta name="robots" />` tag. The available options are:
 # - `index, follow` - Index this page, follow the links on this page.
 # - `noindex, follow` - Don't index this page, but follow the links on this page.

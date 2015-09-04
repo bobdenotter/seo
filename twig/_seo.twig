@@ -40,37 +40,37 @@
 
     {# Seo Title #}
     <fieldset>
-        <label for="seofields-title" class="col-sm-2 control-label">SEO Title:</label>
+        <label for="seofields-title" class="col-sm-2 control-label">{{__("SEO Title")}}:</label>
         <div class="col-sm-10">
             <input class="form-control" id="seofields-title" maxlength="255" type="text" value="{{ seovalues.title|default('') }}">
         </div>
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px;">
-        <p>Will be used as the <tt>&lt;title&gt;</tt> and in search engines. Limit the length to 70 characters.</p>
+        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. {{__("Limit the length to 70 characters")}}.</p>
     </div>
 
     {# Meta description #}
     <fieldset>
         <div class="col-sm-12">
-            <label for="seofields-description" class="control-label">Meta description:</label>
+            <label for="seofields-description" class="control-label">{{__("Meta description")}}:</label>
             <textarea class="form-control" id="seofields-description" style="height: 80px;">{{ seovalues.description|default('') }}</textarea>
         </div>
     </fieldset>
 
     <div class="postfix">
-        <p>Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up
-          in search engines. Limit the length to 156 characters.</p>
+        <p>{{__('Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines')}}.
+           {{__("Limit the length to 156 characters")}}.</p>
     </div>
 
     {# Seo Google Snippet Preview #}
     <div class="col-sm-12 snippet-preview">
-        <label class="control-label">Google snippet preview:</label>
+        <label class="control-label">{{__("Google snippet preview")}}:</label>
         <div id="seosnippet">
-            <span class="title">Bolt SEO Extension</span>
+            <span class="title">{{__("Bolt SEO Extension")}}</span>
             <cite>...</cite>
             <div class="excerpt">...</div>
-            <div class="footer">‎<a href='#'>Sitelink 1</a> - <a href='#'>‎Sitelink 2</a> - ‎<a href='#'>Sitelink 3</a></div>
+            <div class="footer">‎<a href='#'>{{__("Sitelink")}} 1</a> - <a href='#'>‎{{__("Sitelink")}} 2</a> - ‎<a href='#'>{{__("Sitelink")}} 3</a></div>
         </div>
     </div>
 
@@ -80,31 +80,31 @@
 
     {# Shortlink #}
     <fieldset>
-        <label for="seofields-shortlink" class="col-sm-3 control-label">Shortlink (alias):</label>
+        <label for="seofields-shortlink" class="col-sm-3 control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
         </div>
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
-        <p>Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>.</p>
+        <p>{{__("Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>")}}.</p>
     </div>
 
     {# Canonical link #}
     <fieldset>
-        <label for="seofields-canonical" class="col-sm-3 control-label">Canonical Link:</label>
+        <label for="seofields-canonical" class="col-sm-3 control-label">{{__("Canonical Link")}}:</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-canonical" maxlength="255" type="text" value="{{ seovalues.canonical|default('') }}">
         </div>
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
-        <p>Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>. Use with caution, and only if you know what you're doing.</p>
+        <p>{{__('Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>')}}. {{__("Use with caution, and only if you know what you're doing")}}.</p>
     </div>
 
 
     <fieldset>
-        <label for="seofields-robots" class="col-sm-3 control-label">Meta Robots Tag:</label>
+        <label for="seofields-robots" class="col-sm-3 control-label">{{__("Meta Robots Tag")}}:</label>
         <div class="col-sm-9">
             <select id="seofields-robots" class="narrow form-control pull-left">
             {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow' ] %}
@@ -115,7 +115,7 @@
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
-        <p>Use this to set the <tt>&lt;meta name="robots"&gt;</tt>. Use with caution, and only if you know what you're doing.</p>
+        <p>{{__('Use this to set the <tt>&lt;meta name="robots"&gt;</tt>')}}. {{__("Use with caution, and only if you know what you're doing")}}.</p>
     </div>
 
     <input type="hidden" name="{{key}}" id="{{key}}" value="">

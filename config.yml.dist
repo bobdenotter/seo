@@ -1,9 +1,9 @@
-
-# The separator int the title: "Lorum ipsum | My website name"
+# The separator in the title: "Lorum ipsum | My website name"
 title_separator: "|"
 
-# The postfix to append to titles. Leave this blank to use the 'sitename' from config.yml
-title_postfix: ""
+# The postfix to append to titles. Leave this blank to use the 'sitename' from config.yml.
+# Set it to false (no quotes!) to use no postfix at all.
+title_postfix: ''
 
 # The length used for the title and meta description. Note that increasing these values
 # this will _not_ make them appear as longer snippets in Google.
@@ -22,7 +22,7 @@ default:
     description: ""
 
 # Control who can view the more "scary" fields
-#allow:
+# allow:
 #    shortlink: [ chief-editor, admin, developer, root ]
 #    canonical: [ admin, developer, chief-editor, root ]
 #    robots: [ admin, developer, chief-editor, root ]

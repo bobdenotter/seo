@@ -8,8 +8,12 @@
 }%}
 
 {# titlepostfix #}
-{% set titlepostfix = ' ' ~ seoconfig.title_separator|default('-') ~ ' '
-    ~ seoconfig.title_postfix|default(app.config.get('general/sitename')) %}
+{% if seoconfig.title_postfix is sameas(false) %}
+    {% set titlepostfix = '' %}
+{% else %}
+    {% set titlepostfix = ' ' ~ seoconfig.title_separator|default('-') ~ ' '
+        ~ seoconfig.title_postfix|default(app.config.get('general/sitename')) %}
+{% endif %}
 
 {# titlefield #}
 {% set titlefield = "" %}
@@ -149,7 +153,7 @@
             update: function() {
 
                 if ($('#seofields-title').val() != "") {
-                  var title = $('#seofields-title').val();
+                  var title = $('#seofields-title').val() + this.titlepostfix;
                 } else {
                   var title = $('#' + this.titlefield).val() + this.titlepostfix;
                 }

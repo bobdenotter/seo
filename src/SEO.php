@@ -95,10 +95,16 @@ class SEO
 
         $this->initialize($record);
 
-        $postfix = sprintf(" %s %s",
-            !empty($this->config['title_separator']) ? $this->config['title_separator'] : "|",
-            !empty($this->config['title_postfix']) ? $this->config['title_postfix'] : $this->app['config']->get('general/sitename')
-        );
+        // Set the postfix: nothing, sitename, or as configured.
+        if ($this->config['title_postfix'] === false) {
+            $postfix = '';
+        } else {
+            $postfix = sprintf(' %s %s',
+                !empty($this->config['title_separator']) ? $this->config['title_separator'] : '|',
+                !empty($this->config['title_postfix']) ? $this->config['title_postfix'] : $this->app['config']->get('general/sitename')
+            );
+        }
+
 
         if (!empty($this->values['record']['title'])) {
             $title = $this->values['record']['title'];

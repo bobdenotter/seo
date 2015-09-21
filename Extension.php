@@ -13,7 +13,7 @@ require_once('src/SEO.php');
 class Extension extends BaseExtension
 {
 
-    private $version = "v0.9.2";
+    private $version = "v0.9.3";
 
     public function __construct(Application $app)
     {

@@ -78,6 +78,7 @@
 
 <div class="form-group">
 
+    {% if seoconfig.allowed.shortlink or seoconfig.allowed.shortlink is not defined %}
     {# Shortlink #}
     <fieldset>
         <label for="seofields-shortlink" class="col-sm-3 control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
@@ -89,7 +90,9 @@
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
         <p>{{__("Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>")}}.</p>
     </div>
+    {% endif %}
 
+    {% if seoconfig.allowed.canonical or seoconfig.allowed.canonical is not defined %}
     {# Canonical link #}
     <fieldset>
         <label for="seofields-canonical" class="col-sm-3 control-label">{{__("Canonical Link")}}:</label>
@@ -101,8 +104,10 @@
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
         <p>{{__('Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>')}}. {{__("Use with caution, and only if you know what you're doing")}}.</p>
     </div>
+    {% endif %}
 
-
+    {% if seoconfig.allowed.robots or seoconfig.allowed.robots is not defined %}
+    {# Robots tag #}
     <fieldset>
         <label for="seofields-robots" class="col-sm-3 control-label">{{__("Meta Robots Tag")}}:</label>
         <div class="col-sm-9">
@@ -117,6 +122,7 @@
     <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
         <p>{{__('Use this to set the <tt>&lt;meta name="robots"&gt;</tt>')}}. {{__("Use with caution, and only if you know what you're doing")}}.</p>
     </div>
+    {% endif %}
 
     <input type="hidden" name="{{key}}" id="{{key}}" value="">
 

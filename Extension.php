@@ -26,7 +26,7 @@ class Extension extends BaseExtension
         $end = $this->app['config']->getWhichEnd();
 
         if ($end =='backend') {
-            
+
             $this->app->before(array($this, 'before'));
 
             $this->app['htmlsnippets'] = true;
@@ -39,17 +39,20 @@ class Extension extends BaseExtension
 
         $currentUser    = $this->app['users']->getCurrentUser();
         $currentUserId  = $currentUser['id'];
-        
+
+        // Set the Permissions for the advanced field to the correct roles.
         $this->config['allowed'] = array();
-        foreach ($this->config['allow'] as $key => $field) {
-            $this->config["allowed"][$key] = false;
-            foreach ($this->config['allow'][$key] as $role) {
-                if ($this->app['users']->hasRole($currentUserId, $role)) {
-                    $this->config["allowed"][$key] = true;
-                    break;
+        if (!empty($this->config['allow'])) {
+            foreach ($this->config['allow'] as $key => $field) {
+                $this->config["allowed"][$key] = false;
+                foreach ($this->config['allow'][$key] as $role) {
+                    if ($this->app['users']->hasRole($currentUserId, $role)) {
+                        $this->config["allowed"][$key] = true;
+                        break;
+                    }
                 }
             }
-        } 
+        }
 
         $this->app['twig']->addGlobal('seoconfig', $this->config);
 
@@ -59,7 +62,7 @@ class Extension extends BaseExtension
         }
 
     }
-    
+
     public function before()
     {
         $this->translationDir = __DIR__.'/locales/' . substr($this->app['locale'], 0, 2);

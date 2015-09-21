@@ -2,6 +2,8 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
+use Bolt\Translation\Translator as Trans,
+    Symfony\Component\Translation\Loader as TranslationLoader;
 use Bolt\Application;
 use Bolt\BaseExtension;
 
@@ -24,6 +26,8 @@ class Extension extends BaseExtension
         $end = $this->app['config']->getWhichEnd();
 
         if ($end =='backend') {
+            
+            $this->app->before(array($this, 'before'));
 
             $this->app['htmlsnippets'] = true;
 
@@ -40,6 +44,23 @@ class Extension extends BaseExtension
             $this->app['twig']->addGlobal('seo', $seo);
         }
 
+    }
+    
+    public function before()
+    {
+        $this->translationDir = __DIR__.'/locales/' . substr($this->app['locale'], 0, 2);
+        if (is_dir($this->translationDir))
+        {
+            $iterator = new \DirectoryIterator($this->translationDir);
+            foreach ($iterator as $fileInfo)
+            {
+                if ($fileInfo->isFile())
+                {
+                    $this->app['translator']->addLoader('yml', new TranslationLoader\YamlFileLoader());
+                    $this->app['translator']->addResource('yml', $fileInfo->getRealPath(), $this->app['locale']);
+                }
+            }
+        }
     }
 
     public function getName()

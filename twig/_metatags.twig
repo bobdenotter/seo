@@ -1,5 +1,8 @@
 {% if description is not empty %}
 <meta name="description" content="{{ description }}"/>
+{% if keywords|default('') is not empty %}
+        <meta name="keywords" content="{{ keywords }}"/>
+{% endif %}
 {% endif %}
         <meta property="og:locale" content="{{ app.config.get('general/locale') }}" />
         <meta property="og:type" content="website" />

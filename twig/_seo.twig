@@ -31,14 +31,24 @@
     {% endif %}
 {% endfor %}
 
+{# keywordsfield #}
+{% set keywordsfield = "" %}
+{% for field in seoconfig.fields.keywords %}
+    {% if keywordsfield is empty and field in context.contenttype.fields|keys %}
+      {% set keywordsfield = field %}
+    {% endif %}
+{% endfor %}
+
 {% set seovalues = context.content[key]|default('')|json_decode|default([]) %}
 {% set title_length = seoconfig.title_length|default(70) %}
 {% set description_length = seoconfig.description_length|default(156) %}
+{% set keywords_length = seoconfig.keywords_length|default(0) %}
+
+{{ dump(keywords_lenght)}}
 
 {% if seovalues.meta_robots is not defined %}
     {% set seovalues = seovalues|merge({'meta_robots': seoconfig.meta_robots|default("index, follow")})  %}
 {% endif %}
-
 
 {#=== FIELDSET ============================================================================#}
 
@@ -66,6 +76,23 @@
         <p>{{__('Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines')}}.
            {{__("Limit the length to 156 characters")}}.</p>
     </div>
+
+    {% if keywords_length > 0 %}
+    {# Meta description, if set. #}
+    <fieldset>
+        <div class="col-sm-12">
+            <label for="seofields-description" class="control-label">{{__("Meta keywords")}}:</label>
+            <textarea class="form-control" id="seofields-keywords" style="height: 80px;">{{ seovalues.keywords|default('') }}</textarea>
+        </div>
+    </fieldset>
+
+    <div class="postfix">
+        <p>{{__('Will be used as the <tt>&lt;meta name="keywords"&gt;</tt>, and will show up in <em>some</em> search engines. Use comma separated tags only')}}.
+           {{__("Limit the length to 255 characters")}}.</p>
+    </div>
+    {% else %}
+    <input type='hidden' id="seofields-keywords" value='{{ seovalues.keywords|default('') }}'>
+    {% endif %}
 
     {# Seo Google Snippet Preview #}
     <div class="col-sm-12 snippet-preview">
@@ -178,7 +205,8 @@
                     'description': $('#seofields-description').val(),
                     'shortlink': $('#seofields-shortlink').val(),
                     'canonical': $('#seofields-canonical').val(),
-                    'robots': $('#seofields-robots').val() }
+                    'robots': $('#seofields-robots').val(),
+                    'keywords': $('#seofields-keywords').val() }
 
                 $('#{{key}}').val( JSON.stringify(value) );
 

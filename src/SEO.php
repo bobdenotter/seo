@@ -142,6 +142,26 @@ class SEO
 
     }
 
+    public function keywords($record = null)
+    {
+
+        $this->initialize($record);
+
+        if (!empty($this->values['record']['keywords'])) {
+            $keywords = $this->values['record']['keywords'];
+        } else if (!empty($this->values['inferred']['keywords'])) {
+            $keywords = $this->values['inferred']['keywords'];
+        } else {
+            $keywords = $this->values['default']['keywords'];
+        }
+
+        $keywords = str_replace(array("\r", "\n"), "", $keywords);
+
+        return Html::trimText(strip_tags($keywords), $this->config['keywords_length']);
+
+    }
+
+
 
     public function robots($record = null)
     {
@@ -169,6 +189,7 @@ class SEO
         $vars = array(
             'title' => $this->title(),
             'description' => $this->description(),
+            'keywords' => $this->keywords(),
             'image' => $this->findImage(),
             'version' => $this->version,
             'robots' => $this->robots(),

@@ -49,10 +49,10 @@ class SEO
                     $this->values['record'] = json_decode($record->values[$fieldname], true);
                 }
                 if (($titlefield == "") && in_array($fieldname, $this->config['fields']['title']) ) {
-                    $this->values['inferred']['title'] = $record->values[$fieldname];
+                    $this->values['inferred']['title'] = $titlefield = $record->values[$fieldname];
                 }
                 if (($descriptionfield == "") && in_array($fieldname, $this->config['fields']['description']) ) {
-                    $this->values['inferred']['description'] = $record->values[$fieldname];
+                    $this->values['inferred']['description'] = $descriptionfield = $record->values[$fieldname];
                 }
             }
         }

@@ -114,6 +114,8 @@ class SEO
             $title = $this->values['default']['title'] . $postfix;
         }
 
+        $title = str_replace(array("\r", "\n"), "", $title);
+
         // Note: Do not trim the length. Longer lengths are not beneficial for how they are
         // shown in google, but they _are_ indexed.
         return $title;
@@ -133,6 +135,8 @@ class SEO
         } else {
             $description = $this->values['default']['description'];
         }
+
+        $description = str_replace(array("\r", "\n"), "", $description);
 
         return Html::trimText(strip_tags($description), $this->config['description_length']);
 

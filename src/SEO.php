@@ -193,6 +193,11 @@ class SEO
                     $image = $this->record->values[$fieldname];
                 }
                 break;
+            } elseif ($field['type'] == 'imagelist') {
+                if (isset($this->record->values[$fieldname][0]['filename'])) {
+                    $image = $this->record->values[$fieldname][0]['filename'];
+                }
+                break;
             }
         }
 

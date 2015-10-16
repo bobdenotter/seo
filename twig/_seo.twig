@@ -44,8 +44,6 @@
 {% set description_length = seoconfig.description_length|default(156) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
-{{ dump(keywords_lenght)}}
-
 {% if seovalues.meta_robots is not defined %}
     {% set seovalues = seovalues|merge({'meta_robots': seoconfig.meta_robots|default("index, follow")})  %}
 {% endif %}

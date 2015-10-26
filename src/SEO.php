@@ -107,7 +107,7 @@ class SEO
 
 
         if (!empty($this->values['record']['title'])) {
-            $title = $this->values['record']['title'];
+            $title = $this->values['record']['title'] . $postfix;
         } else if (!empty($this->values['inferred']['title'])) {
             $title = $this->values['inferred']['title'] . $postfix;
         } else {

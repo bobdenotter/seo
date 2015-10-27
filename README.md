@@ -48,7 +48,14 @@ To add the SEO title and Meta tags to your HTML, edit your templates (the 'maste
 When you've done this, all pages that make use of these templates will automatically have
 the correct `<title>` tag and the meta- and OG-tags.
 
-This is a new extension, so the functionality is still pretty bare bones. What's there
+### Configure the 'meta tags' output
+
+By default, the output of the meta-tags is defined in the file `extensions/vendor/bobdenotter/seo/twig/_metatags.twig`. 
+If you'd like to configure this output, you shouldn't edit this file directly. If you do, 
+changes will be overwritten on subsequent updates of this extension. Instead, copy the 
+file `_metatags.twig` to your theme's folder, and the extension will pick it up from there. 
+
+**Note:** This is a new extension, so the functionality is still pretty bare bones. What's there
 works well, but there is probably a lot of functionality to add, to improve search engine
 indexing. If you'd like to contribute, or have a good idea, feel free to open an issue on
 the tracker at the [SEO Extension repository](https://github.com/bobdenotter/seo/issues) on Github.

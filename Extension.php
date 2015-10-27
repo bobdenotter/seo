@@ -13,7 +13,7 @@ require_once('src/SEO.php');
 class Extension extends BaseExtension
 {
 
-    private $version = "v0.9.8";
+    private $version = "v0.9.9";
 
     public function __construct(Application $app)
     {
@@ -35,7 +35,7 @@ class Extension extends BaseExtension
             // $this->addJavascript('assets/seo.js', true);
         }
 
-        $this->app['twig.loader.filesystem']->prependPath(__DIR__."/twig");
+        $this->app['twig.loader.filesystem']->appendPath(__DIR__."/twig");
 
         $currentUser    = $this->app['users']->getCurrentUser();
         $currentUserId  = $currentUser['id'];

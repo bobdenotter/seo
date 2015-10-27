@@ -35,7 +35,7 @@ class Extension extends BaseExtension
             // $this->addJavascript('assets/seo.js', true);
         }
 
-        $this->app['twig.loader.filesystem']->appendPath(__DIR__."/twig");
+        $this->app['twig.loader.filesystem']->addPath(__DIR__."/twig");
 
         $currentUser    = $this->app['users']->getCurrentUser();
         $currentUserId  = $currentUser['id'];

@@ -14,7 +14,7 @@ class SEOField implements FieldInterface
 
     public function getTemplate()
     {
-        return '_seo.twig';
+        return '_seo_extension_field.twig';
     }
 
     public function getStorageType()

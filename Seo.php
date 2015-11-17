@@ -24,7 +24,7 @@ class SEOField implements FieldInterface
 
     public function getStorageOptions()
     {
-        return array('default' => '');
+        return array('default' => null);
     }
 
 }

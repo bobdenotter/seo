@@ -32,7 +32,6 @@
     {% endif %}
 {% endfor %}
 
-{{ dump(seoconfig.fields) }}
 {# keywordsfield #}
 {% set keywordsfield = "" %}
 {% for field in seoconfig.fields.keywords|default([]) %}

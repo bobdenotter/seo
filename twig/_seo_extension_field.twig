@@ -40,7 +40,7 @@
     {% endif %}
 {% endfor %}
 
-{% set seovalues = context.content[key]|default('')|json_decode|default([]) %}
+{% set seovalues = context.content.get(contentkey)|default('')|json_decode|default([]) %}
 {% set title_length = seoconfig.title_length|default(70) %}
 {% set description_length = seoconfig.description_length|default(156) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
@@ -142,7 +142,7 @@
         <label for="seofields-robots" class="col-sm-3 control-label">{{__("Meta Robots Tag")}}:</label>
         <div class="col-sm-9">
             <select id="seofields-robots" class="narrow form-control pull-left">
-            {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow' ] %}
+            {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow', 'noodp' ] %}
                 <option value="{{ option }}" {% if seovalues.meta_robots == option %}selected{% endif %}>{{ option }}</option>
             {% endfor %}
             </select>

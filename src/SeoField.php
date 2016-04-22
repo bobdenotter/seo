@@ -4,7 +4,7 @@ namespace Bolt\Extension\BobdenOtter\Seo;
 
 use Bolt\Field\FieldInterface;
 
-class SEOField implements FieldInterface
+class SeoField implements FieldInterface
 {
 
     public function getName()
@@ -24,7 +24,7 @@ class SEOField implements FieldInterface
 
     public function getStorageOptions()
     {
-        return array('default' => null, 'notnull' => false);
+        return ['default' => null, 'notnull' => false];
     }
 
 }

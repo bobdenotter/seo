@@ -3,7 +3,7 @@
     "description": "An extension to easily manage SEO title, meta description and OG tags.",
     "type": "bolt-extension",
     "require": {
-        "bolt/bolt": ">=2.1.0,<4.0.0"
+        "bolt/bolt": "^3.0"
     },
     "license": "MIT",
     "authors": [
@@ -13,15 +13,12 @@
         }
     ],
     "autoload": {
-        "files": [
-            "init.php"
-        ],
         "psr-4": {
-            "Bolt\\Extension\\BobdenOtter\\Seo\\": ""
+            "Bolt\\Extension\\BobdenOtter\\Seo\\": "src"
         }
     },
-    
     "extra": {
-        "bolt-assets": "assets"
+        "bolt-assets": "web",
+        "bolt-class": "Bolt\\Extension\\BobdenOtter\\Seo\\SeoExtension"
     }
 }

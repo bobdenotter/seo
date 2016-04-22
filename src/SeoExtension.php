@@ -2,23 +2,35 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
-use Bolt\Translation\Translator as Trans,
-    Symfony\Component\Translation\Loader as TranslationLoader;
-use Bolt\Application;
-use Bolt\BaseExtension;
+use Bolt\Extension\SimpleExtension;
+//use Bolt\Translation\Translator as Trans;
+//use Symfony\Component\Translation\Loader as TranslationLoader;
+//use Bolt\Application;
 
-require_once('Seo.php');
-require_once('src/SEO.php');
+//require_once('../Seo.php');
+//require_once('./SEO.php');
 
-class Extension extends BaseExtension
+class SeoExtension extends SimpleExtension
 {
 
-    private $version = "v0.9.12";
+//    public function __construct(Application $app)
+//    {
+//        parent::__construct($app);
+//        $this->app['config']->getFields()->addField(new SEOField());
+//    }
 
-    public function __construct(Application $app)
+    public function registerFields()
     {
-        parent::__construct($app);
-        $this->app['config']->getFields()->addField(new SEOField());
+        return [
+            new SeoField(),
+        ];
+    }
+
+    protected function registerTwigPaths()
+    {
+        return [
+            'twig' => ['position' => 'prepend', 'namespace' => 'bolt']
+        ];
     }
 
     public function initialize() {
@@ -78,11 +90,6 @@ class Extension extends BaseExtension
                 }
             }
         }
-    }
-
-    public function getName()
-    {
-        return "seo";
     }
 
 }

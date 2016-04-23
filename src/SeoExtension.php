@@ -2,22 +2,18 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
+use Bolt\Asset\File\Stylesheet;
+use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
 //use Bolt\Translation\Translator as Trans;
 //use Symfony\Component\Translation\Loader as TranslationLoader;
-//use Bolt\Application;
 
 //require_once('../Seo.php');
 //require_once('./SEO.php');
 
 class SeoExtension extends SimpleExtension
 {
-
-//    public function __construct(Application $app)
-//    {
-//        parent::__construct($app);
-//        $this->app['config']->getFields()->addField(new SEOField());
-//    }
+    private $version = "v0.10.0";
 
     public function registerFields()
     {
@@ -29,7 +25,32 @@ class SeoExtension extends SimpleExtension
     protected function registerTwigPaths()
     {
         return [
-            'twig' => ['position' => 'prepend', 'namespace' => 'bolt']
+            'templates' => ['position' => 'prepend', 'namespace' => 'bolt']
+        ];
+    }
+
+    protected function registerTwigFunctions()
+    {
+        return [
+            'seoconfig' => 'seoConfig',
+        ];
+    }
+
+    public function SeoConfig()
+    {
+        return $this->getConfig();
+    }
+
+
+    protected function registerAssets()
+    {
+        $asset = new Stylesheet();
+        $asset->setFileName('seo.css')
+            ->setZone(Zone::BACKEND)
+        ;
+
+        return [
+            $asset,
         ];
     }
 
@@ -46,8 +67,6 @@ class SeoExtension extends SimpleExtension
             $this->addCss('assets/seo.css');
             // $this->addJavascript('assets/seo.js', true);
         }
-
-        $this->app['twig.loader.filesystem']->addPath(__DIR__."/twig");
 
         $currentUser    = $this->app['users']->getCurrentUser();
         $currentUserId  = $currentUser['id'];
@@ -66,6 +85,8 @@ class SeoExtension extends SimpleExtension
             }
         }
 
+        echo "joe!";
+        die();
         $this->app['twig']->addGlobal('seoconfig', $this->config);
 
         if ($end == 'frontend') {

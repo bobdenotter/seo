@@ -54,8 +54,8 @@
 {#=== FIELDSET ============================================================================#}
 
     {# Seo Title #}
-    <fieldset>
-        <label for="seofields-title" class="col-sm-2 control-label">{{__("SEO Title")}}:</label>
+    <fieldset class="form-group">
+        <label for="seofields-title" class="col-sm-2 main control-label">{{__("SEO Title")}}:</label>
         <div class="col-sm-10">
             <input class="form-control" id="seofields-title" maxlength="255" type="text" value="{{ seovalues.title|default('') }}">
         </div>
@@ -66,9 +66,9 @@
     </div>
 
     {# Meta description #}
-    <fieldset>
+    <fieldset class="form-group">
         <div class="col-sm-12">
-            <label for="seofields-description" class="control-label">{{__("Meta description")}}:</label>
+            <label for="seofields-description" class="main control-label">{{__("Meta description")}}:</label>
             <textarea class="form-control" id="seofields-description" style="height: 80px;">{{ seovalues.description|default('') }}</textarea>
         </div>
     </fieldset>
@@ -80,9 +80,9 @@
 
     {% if keywords_length > 0 %}
     {# Meta description, if set. #}
-    <fieldset>
+    <fieldset class="form-group">
         <div class="col-sm-12">
-            <label for="seofields-description" class="control-label">{{__("Meta keywords")}}:</label>
+            <label for="seofields-description" class="main control-label">{{__("Meta keywords")}}:</label>
             <textarea class="form-control" id="seofields-keywords" style="height: 80px;">{{ seovalues.keywords|default('') }}</textarea>
         </div>
     </fieldset>
@@ -96,8 +96,9 @@
     {% endif %}
 
     {# Seo Google Snippet Preview #}
+    <fieldset class="form-group">
     <div class="col-sm-12 snippet-preview">
-        <label class="control-label">{{__("Google snippet preview")}}:</label>
+        <label class="main control-label">{{__("Google snippet preview")}}:</label>
         <div id="seosnippet">
             <span class="title">{{__("Bolt SEO Extension")}}</span>
             <cite>...</cite>
@@ -105,15 +106,12 @@
             <div class="footer">‎<a href='#'>{{__("Sitelink")}} 1</a> - <a href='#'>‎{{__("Sitelink")}} 2</a> - ‎<a href='#'>{{__("Sitelink")}} 3</a></div>
         </div>
     </div>
-
-</div>
-
-<div class="form-group">
+    </fieldset>
 
     {% if seoconfig.allowed.shortlink|default(true) %}
     {# Shortlink #}
-    <fieldset>
-        <label for="seofields-shortlink" class="col-sm-3 control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
+    <fieldset class="form-group">
+        <label for="seofields-shortlink" class="col-sm-3 main control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
         </div>
@@ -126,8 +124,8 @@
 
     {% if seoconfig.allowed.canonical|default(true) %}
     {# Canonical link #}
-    <fieldset>
-        <label for="seofields-canonical" class="col-sm-3 control-label">{{__("Canonical Link")}}:</label>
+    <fieldset class="form-group">
+        <label for="seofields-canonical" class="col-sm-3 main control-label">{{__("Canonical Link")}}:</label>
         <div class="col-sm-9">
             <input class="form-control narrow" id="seofields-canonical" maxlength="255" type="text" value="{{ seovalues.canonical|default('') }}">
         </div>
@@ -140,8 +138,8 @@
 
     {% if seoconfig.allowed.robots|default(true) %}
     {# Robots tag #}
-    <fieldset>
-        <label for="seofields-robots" class="col-sm-3 control-label">{{__("Meta Robots Tag")}}:</label>
+    <fieldset class="form-group">
+        <label for="seofields-robots" class="col-sm-3 main control-label">{{__("Meta Robots Tag")}}:</label>
         <div class="col-sm-9">
             <select id="seofields-robots" class="narrow form-control pull-left">
             {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow', 'noodp' ] %}

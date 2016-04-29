@@ -2,6 +2,7 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
+use Bolt\Asset\File\JavaScript;
 use Bolt\Asset\File\Stylesheet;
 use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
@@ -31,7 +32,10 @@ class SeoExtension extends SimpleExtension
 
     protected function registerTwigFunctions()
     {
+        $seo = new SEO($this->getContainer(), $this->getConfig(), $this->version);
+
         return [
+            'seo' =>  'seoObject',
             'seoconfig' => 'seoConfig',
         ];
     }
@@ -41,16 +45,28 @@ class SeoExtension extends SimpleExtension
         return $this->getConfig();
     }
 
+    public function SeoObject()
+    {
+        return new SEO($this->getContainer(), $this->getConfig(), $this->version);
+    }
+
 
     protected function registerAssets()
     {
-        $asset = new Stylesheet();
-        $asset->setFileName('seo.css')
-            ->setZone(Zone::BACKEND)
-        ;
+        $seoCss = new Stylesheet();
+        $seoCss->setFileName('seo.css')->setZone(Zone::BACKEND);
+
+        $underscoreJs = new JavaScript();
+        $underscoreJs->setFilename('underscore-min.js')->setZone(Zone::BACKEND)->setPriority(10);
+
+        $backboneJs = new JavaScript();
+        $backboneJs->setFilename('backbone-min.js')->setZone(Zone::BACKEND)->setPriority(15);
 
         return [
-            $asset,
+            $seoCss,
+            $backboneJs,
+            $underscoreJs,
+
         ];
     }
 
@@ -85,15 +101,7 @@ class SeoExtension extends SimpleExtension
             }
         }
 
-        echo "joe!";
-        die();
         $this->app['twig']->addGlobal('seoconfig', $this->config);
-
-        if ($end == 'frontend') {
-            $seo = new SEO($this->app, $this->config, $this->version);
-            $this->app['twig']->addGlobal('seo', $seo);
-        }
-
     }
 
     public function before()

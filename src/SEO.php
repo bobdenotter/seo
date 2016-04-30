@@ -20,7 +20,6 @@ class SEO
         $this->values = array();
 
         // $this->initialize(null, true);
-
     }
 
     public function initialize($record = null)
@@ -40,7 +39,6 @@ class SEO
 
         $titlefield = '';
         $descriptionfield = '';
-
 
         // Find the seofield and the fallback fields for description and title
         if (!empty($record)) {
@@ -76,6 +74,12 @@ class SEO
             $this->values['default']['description'] = $this->app['config']->get('general/payoff');
         }
 
+        if (!empty($this->config['default']['keywords'])) {
+            $this->values['default']['keywords'] = $this->config['default']['keywords'];
+        } else {
+            $this->values['default']['keywords'] = "";
+        }
+
         if (!empty($this->config['meta_robots'])) {
             $this->values['default']['meta_robots'] = $this->config['meta_robots'];
         } else {
@@ -87,12 +91,10 @@ class SEO
         }
 
         $this->setCanonical();
-
     }
 
     public function title($record = null)
     {
-
         $this->initialize($record);
 
         // Set the postfix: nothing, sitename, or as configured.
@@ -104,7 +106,6 @@ class SEO
                 !empty($this->config['title_postfix']) ? $this->config['title_postfix'] : $this->app['config']->get('general/sitename')
             );
         }
-
 
         if (!empty($this->values['record']['title'])) {
             $title = $this->values['record']['title'] . $postfix;
@@ -119,13 +120,10 @@ class SEO
         // Note: Do not trim the length. Longer lengths are not beneficial for how they are
         // shown in google, but they _are_ indexed.
         return $title;
-
-
     }
 
     public function description($record = null)
     {
-
         $this->initialize($record);
 
         if (!empty($this->values['record']['description'])) {
@@ -139,12 +137,10 @@ class SEO
         $description = str_replace(array("\r", "\n"), "", $description);
 
         return Html::trimText(strip_tags($description), $this->config['description_length']);
-
     }
 
     public function keywords($record = null)
     {
-
         $this->initialize($record);
 
         if (!empty($this->values['record']['keywords'])) {
@@ -158,14 +154,10 @@ class SEO
         $keywords = str_replace(array("\r", "\n"), "", $keywords);
 
         return Html::trimText(strip_tags($keywords), $this->config['keywords_length']);
-
     }
-
-
 
     public function robots($record = null)
     {
-
         $this->initialize($record);
 
         if (!empty($this->values['record']['robots'])) {
@@ -177,13 +169,10 @@ class SEO
         }
 
         return $robots;
-
     }
-
 
     public function metatags($record = null)
     {
-
         $this->initialize($record);
 
         $vars = array(
@@ -199,13 +188,11 @@ class SEO
         $html = $this->app['render']->render('@bolt/_metatags.twig', $vars);
 
         return new \Twig_Markup($html, 'UTF-8');
-
     }
 
 
     private function findImage()
     {
-
         if (empty($this->record)) {
             return '';
         }
@@ -236,12 +223,10 @@ class SEO
         } else {
             return '';
         }
-
     }
 
     public function setCanonical($canonical = "")
     {
-
         // If we set it explicitly, don't "reset" it by default.
         if (empty($canonical) && $this->canonicalSet) {
             return;
@@ -271,7 +256,6 @@ class SEO
                 $this->app['resources']->setUrl('canonicalurl', $canonical);
             }
         }
-
     }
 
 }

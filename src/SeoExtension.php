@@ -7,10 +7,9 @@ use Bolt\Asset\File\Stylesheet;
 use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
 //use Bolt\Translation\Translator as Trans;
+use Silex\Application;
 //use Symfony\Component\Translation\Loader as TranslationLoader;
 
-//require_once('../Seo.php');
-//require_once('./SEO.php');
 
 class SeoExtension extends SimpleExtension
 {
@@ -23,33 +22,19 @@ class SeoExtension extends SimpleExtension
         ];
     }
 
+    public function registerServices(Application $app)
+    {
+        $seo = new SEO($this->getContainer(), $this->getConfig(), $this->version);
+        $app['twig']->addGlobal('seo', $seo);
+        $app['twig']->addGlobal('seoconfig', $this->getConfig());
+    }
+
     protected function registerTwigPaths()
     {
         return [
             'templates' => ['position' => 'prepend', 'namespace' => 'bolt']
         ];
     }
-
-    protected function registerTwigFunctions()
-    {
-        $seo = new SEO($this->getContainer(), $this->getConfig(), $this->version);
-
-        return [
-            'seo' =>  'seoObject',
-            'seoconfig' => 'seoConfig',
-        ];
-    }
-
-    public function SeoConfig()
-    {
-        return $this->getConfig();
-    }
-
-    public function SeoObject()
-    {
-        return new SEO($this->getContainer(), $this->getConfig(), $this->version);
-    }
-
 
     protected function registerAssets()
     {
@@ -71,18 +56,6 @@ class SeoExtension extends SimpleExtension
     }
 
     public function initialize() {
-
-        $end = $this->app['config']->getWhichEnd();
-
-        if ($end =='backend') {
-
-            $this->app->before(array($this, 'before'));
-
-            $this->app['htmlsnippets'] = true;
-
-            $this->addCss('assets/seo.css');
-            // $this->addJavascript('assets/seo.js', true);
-        }
 
         $currentUser    = $this->app['users']->getCurrentUser();
         $currentUserId  = $currentUser['id'];

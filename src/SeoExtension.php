@@ -14,9 +14,9 @@ use Silex\Application;
 
 class SeoExtension extends SimpleExtension
 {
-    private $version = "v0.10.0";
+    private $version = "v0.10.1";
 
-    private $eastereggchance = 0.15;
+    private $eastereggchance = 0.1;
 
     public function registerFields()
     {
@@ -82,9 +82,16 @@ class SeoExtension extends SimpleExtension
 
     public function registerServices(Application $app)
     {
-        $seo = new SEO($this->getContainer(), $this->getConfig(), $this->version);
-        $app['twig']->addGlobal('seo', $seo);
-        $app['twig']->addGlobal('seoconfig', $this->getConfig());
+        $app['twig'] = $app->extend(
+            'twig',
+            function ($twig) use ($app) {
+                    $seo = new SEO($this->getContainer(), $this->getConfig(), $this->version);
+                    $twig->addGlobal('seo', $seo);
+                    $twig->addGlobal('seoconfig', $this->getConfig());
+
+                    return $twig;
+            }
+        );
     }
 
     protected function registerTwigPaths()

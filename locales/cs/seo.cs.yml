@@ -1,0 +1,16 @@
+"SEO Title": SEO titulek
+"Will be used as the <tt>&lt;title&gt;</tt> and in search engines": "Bude použito jako <tt>&lt;title&gt;</tt> a ve vyhledávačích"
+"Limit the length to 70 characters": Omezte délku na 70 znaků
+"Meta description": Meta popisek
+'Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines': 'Bude použito jako <tt>&lt;meta name="description"&gt;</tt>, a bude se ukazovat ve vyhledávačích'
+"Limit the length to 156 characters": Omezte délku na 156 znaků
+"Google snippet preview": Ukázka Google snippetu
+"Bolt SEO Extension": Bolt SEO rozšíření
+"Sitelink": Odkaz stránky
+Shortlink: Krátký odkaz
+alias: alias
+"Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>": "Použijte pro vytvoření aliasu nebo krátkého odkazu pro tento záznam. Ujistěte se, že je to absolutní URL, která začíná na <tt>/</tt>"
+'Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>': 'Použijte pro přepsání <tt>&lt;link rel="canonical"&gt;</tt>'
+"Use with caution, and only if you know what you're doing": "Používejte jen tehdy, jste-li si jistí, co děláte"
+"Meta Robots Tag": Meta Robots Tag
+'Use this to set the <tt>&lt;meta name="robots"&gt;</tt>': 'Použijte pro nastavení <tt>&lt;meta name="robots"&gt;</tt>'

@@ -185,7 +185,7 @@ class SEO
             'canonical' => $this->app['resources']->getUrl('canonicalurl')
         );
 
-        $html = $this->app['render']->render('@bolt/_metatags.twig', $vars);
+        $html = $this->app['render']->render($this->config['templates']['meta'], $vars);
 
         return new \Twig_Markup($html, 'UTF-8');
     }

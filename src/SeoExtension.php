@@ -14,9 +14,9 @@ use Silex\Application;
 
 class SeoExtension extends SimpleExtension
 {
-    private $version = "v0.10.2";
+    private $version = "v0.10.3";
 
-    private $eastereggchance = 0.1;
+    private $eastereggchance = 0.075;
 
     public function registerFields()
     {

@@ -14,7 +14,7 @@ use Silex\Application;
 
 class SeoExtension extends SimpleExtension
 {
-    private $version = "v0.10.1";
+    private $version = "v0.10.2";
 
     private $eastereggchance = 0.1;
 
@@ -140,4 +140,12 @@ class SeoExtension extends SimpleExtension
         }
     }
 
+    protected function getDefaultConfig()
+    {
+        return [
+            'templates' => [
+                'meta' => '@bolt/_metatags.twig',
+            ]
+        ];
+    }
 }

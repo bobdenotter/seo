@@ -43,3 +43,5 @@ robot_override:
     taxonomylink: "noindex, follow"
     search: "noindex, follow"
 
+# templates:
+#     meta: @bolt/_metatags.twig

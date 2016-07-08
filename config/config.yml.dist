@@ -45,3 +45,6 @@ robot_override:
 
 # templates:
 #     meta: @bolt/_metatags.twig
+
+# Don't like the easter egg? Disable it here, if you wish.
+disableeasteregg: false

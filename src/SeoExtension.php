@@ -16,8 +16,6 @@ class SeoExtension extends SimpleExtension
 {
     private $version = "v0.10.3";
 
-    private $eastereggchance = 0.075;
-
     public function registerFields()
     {
         return [
@@ -42,17 +40,21 @@ class SeoExtension extends SimpleExtension
             $underscoreJs,
         ];
 
-        // Perhaps we show the widget on the dashboard.
-        $rollthedice = (float)rand() / (float)getrandmax();
-        if ($rollthedice < $this->eastereggchance) {
-            $widgetObj = new Widget();
-            $widgetObj
-                ->setZone('backend')
-                ->setLocation('dashboard_aside_middle')
-                ->setCallback([$this, 'backendDashboardWidget'])
-                ->setCallbackArguments([])
-                ->setDefer(false);
-            $assets[] = $widgetObj;
+        $config = $this->getConfig();
+
+        // Perhaps we show the Easter Egg widget on the dashboard.
+        if (!$config['disableeasteregg']) {
+            $rollthedice = (float)rand() / (float)getrandmax();
+            if ($rollthedice < $config['eastereggchance']) {
+                $widgetObj = new Widget();
+                $widgetObj
+                    ->setZone('backend')
+                    ->setLocation('dashboard_aside_middle')
+                    ->setCallback([$this, 'backendDashboardWidget'])
+                    ->setCallbackArguments([])
+                    ->setDefer(false);
+                $assets[] = $widgetObj;
+            }
         }
 
         return $assets;
@@ -145,7 +147,9 @@ class SeoExtension extends SimpleExtension
         return [
             'templates' => [
                 'meta' => '@bolt/_metatags.twig',
-            ]
+            ],
+            'eastereggchance' => 0.075,
+            'disableeasteregg' => false
         ];
     }
 }

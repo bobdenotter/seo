@@ -1,0 +1,16 @@
+"SEO Title": Titre SEO
+"Will be used as the <tt>&lt;title&gt;</tt> and in search engines": "Sera utilisé comme balise <tt>&lt;title&gt;</tt> et titre des moteurs de recherche"
+"Limit the length to 70 characters": Longueur limitée à 70 caractères
+"Meta description": Description Meta
+'Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines': 'Sera utilisé comme <tt>&lt;meta name="description"&gt;</tt> et affiché dans les moteurs de recherche'
+"Limit the length to 156 characters": Longueur limitée à 156 caractères
+"Google snippet preview": Prévisualisation du Google snippet
+"Bolt SEO Extension": Extension Bolt SEO
+"Sitelink": Sitelink
+Shortlink: Shortlink
+alias: alias
+"Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>": "Sera utilisé pour créer un alias ou un shortlink vers cet enregistrement. Soyez certain d'indiquer un lien absolut, commençant par un <tt>/</tt>"
+'Use this to override the <tt>&lt;link rel="canonical"&gt;</tt>': 'Sera utilisé pour surcharger la balise <tt>&lt;link rel="canonical"&gt;</tt>'
+"Use with caution, and only if you know what you're doing": "Faites-le avec précaution, et seulement si vous savez ce que cela implique"
+"Meta Robots Tag": Meta Robots
+'Use this to set the <tt>&lt;meta name="robots"&gt;</tt>': 'Sera utilisé pour fixer la balise <tt>&lt;meta name="robots"&gt;</tt>'

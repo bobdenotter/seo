@@ -4,7 +4,7 @@
         <meta name="keywords" content="{{ keywords }}"/>
 {% endif %}
 {% endif %}
-        <meta property="og:locale" content="{{ app.config.get('general/locale') }}" />
+        <meta property="og:locale" content="{{ htmllang()|replace({'-': '_'}) }}" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{{ title }}" />
 {% if description is not empty %}

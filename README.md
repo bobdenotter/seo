@@ -51,12 +51,17 @@ the correct `<title>` tag and the meta- and OG-tags.
 ### Configure the 'meta tags' output
 
 By default, the output of the meta-tags is defined in the file `extensions/vendor/bobdenotter/seo/twig/_metatags.twig`. 
-If you'd like to configure this output, you shouldn't edit this file directly. If you do, 
-changes will be overwritten on subsequent updates of this extension. 
-Instead, in `/app/config/extensions/seo.bobdenotter.yml` decomment the lines
-```templates:
+If you'd like to configure this output, you shouldn't edit this file directly. If you 
+do, changes will be overwritten on subsequent updates of this extension. 
+Instead, in `/app/config/extensions/seo.bobdenotter.yml` uncomment the following lines:
+
+```
+templates:
     meta: _metatags.twig
-```, and copy the file `_metatags.twig` to your theme's folder, and the extension will pick it up from there. 
+```
+
+Next, copy the file `_metatags.twig` to your theme folder, and the extension will pick it up 
+from there. 
 
 **Note:** This is a new extension, so the functionality is still pretty bare bones. What's there
 works well, but there is probably a lot of functionality to add, to improve search engine

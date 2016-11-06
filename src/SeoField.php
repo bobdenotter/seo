@@ -6,7 +6,6 @@ use Bolt\Field\FieldInterface;
 
 class SeoField implements FieldInterface
 {
-
     public function getName()
     {
         return 'seo';
@@ -26,5 +25,4 @@ class SeoField implements FieldInterface
     {
         return ['default' => null, 'notnull' => false];
     }
-
 }

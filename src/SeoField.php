@@ -2,7 +2,7 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
-use Bolt\Field\FieldInterface;
+use Bolt\Storage\Field\FieldInterface;
 
 class SeoField implements FieldInterface
 {

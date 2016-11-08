@@ -3,13 +3,30 @@
 namespace Bolt\Extension\BobdenOtter\Seo;
 
 use Bolt\Helpers\Html;
-use Symfony\Component\HttpFoundation\Request;
+use Bolt\Legacy\Content;
+use Silex\Application;
 
 class SEO
 {
+    /** @var bool */
     protected $canonicalSet = false;
+    /** @var array */
+    protected $config;
+    /** @var string */
+    protected $version;
+    /** @var Content */
+    protected $record;
+    /** @var array */
+    protected $values;
 
-    public function __construct(\Silex\Application $app, $config, $version)
+    /**
+     * Constructor.
+     *
+     * @param Application $app
+     * @param array       $config
+     * @param string      $version
+     */
+    public function __construct(Application $app, $config, $version)
     {
         $this->app = $app;
         $this->config = $config;
@@ -17,10 +34,11 @@ class SEO
 
         $this->record = [];
         $this->values = [];
-
-        // $this->initialize(null, true);
     }
 
+    /**
+     * @param Content $record
+     */
     public function initialize($record = null)
     {
         // Make sure $record contains something sensible.
@@ -92,6 +110,11 @@ class SEO
         $this->setCanonical();
     }
 
+    /**
+     * @param Content $record
+     *
+     * @return string
+     */
     public function title($record = null)
     {
         $this->initialize($record);
@@ -121,6 +144,11 @@ class SEO
         return $title;
     }
 
+    /**
+     * @param Content $record
+     *
+     * @return string
+     */
     public function description($record = null)
     {
         $this->initialize($record);
@@ -138,6 +166,11 @@ class SEO
         return Html::trimText(strip_tags($description), $this->config['description_length']);
     }
 
+    /**
+     * @param Content $record
+     *
+     * @return string
+     */
     public function keywords($record = null)
     {
         $this->initialize($record);
@@ -155,6 +188,11 @@ class SEO
         return Html::trimText(strip_tags($keywords), $this->config['keywords_length']);
     }
 
+    /**
+     * @param Content $record
+     *
+     * @return array
+     */
     public function robots($record = null)
     {
         $this->initialize($record);
@@ -170,6 +208,11 @@ class SEO
         return $robots;
     }
 
+    /**
+     * @param Content $record
+     *
+     * @return \Twig_Markup
+     */
     public function metatags($record = null)
     {
         $this->initialize($record);
@@ -189,6 +232,9 @@ class SEO
         return new \Twig_Markup($html, 'UTF-8');
     }
 
+    /**
+     * @return array|string
+     */
     private function findImage()
     {
         if (empty($this->record)) {
@@ -212,13 +258,7 @@ class SEO
         }
 
         if (!empty($image)) {
-            $image = sprintf('%s%s%s',
-                $this->app['paths']['canonical'],
-                $this->app['paths']['files'],
-                $image
-            );
-
-            return $image;
+            return sprintf('%sfiles/%s', $this->app['resources']->getUrl('canonicalurl'), $image);
         } else {
             return '';
         }
@@ -240,7 +280,6 @@ class SEO
 
         if (!empty($canonical)) {
             if (strpos($canonical, 'http') !== 0) {
-
                 // Relative link, so we add the domain.
                 if (strpos($canonical, '/') !== 0) {
                     $canonical = '/' . $canonical;
@@ -249,7 +288,7 @@ class SEO
                 $this->app['resources']->setUrl('canonicalurl', $url);
             } else {
 
-                // Absoloute link, so we don't add the domain.
+                // Absolute link, so we don't add the domain.
                 $this->app['resources']->setUrl('canonicalurl', $canonical);
             }
         }

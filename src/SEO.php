@@ -52,6 +52,10 @@ class SEO
             } else {
                 $record = $this->record;
             }
+        } elseif (!empty($vars['contenttype'])) {
+            $this->values['inferred']['title'] = $vars['contenttype'];
+        } elseif (!empty($vars['taxonomy'])) {
+            $this->values['inferred']['title'] = $vars['slug'];
         }
 
         $titlefield = '';

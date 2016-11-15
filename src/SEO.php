@@ -56,7 +56,7 @@ class SEO
             $this->values['inferred']['title'] = $vars['contenttype'];
         } elseif (!empty($vars['taxonomy'])) {
             $this->values['inferred']['title'] = sprintf('%s %s',
-                $this->app['translator']->trans('general.phrase.overview-for', [], 'messages'),
+                $this->app['translator']->trans('general.phrase.overview-for'),
                 $vars['slug']
             );
         }

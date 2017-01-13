@@ -45,7 +45,7 @@
 {% set description_length = seoconfig.description_length|default(156) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
-{% if seovalues.meta_robots is not defined %}
+{% if seovalues.robots is not defined %}
     {% set seovalues = seovalues|merge({'meta_robots': seoconfig.meta_robots|default("index, follow")})  %}
 {% endif %}
 
@@ -77,10 +77,10 @@
     </div>
 
     {% if keywords_length > 0 %}
-    {# Meta description, if set. #}
+    {# Meta keywords, if set. #}
     <fieldset class="form-group">
         <div class="col-sm-12">
-            <label for="seofields-description" class="main control-label">{{__("Meta keywords")}}:</label>
+            <label for="seofields-keywords" class="main control-label">{{__("Meta keywords")}}:</label>
             <textarea class="form-control" id="seofields-keywords" style="height: 80px;">{{ seovalues.keywords|default('') }}</textarea>
         </div>
     </fieldset>
@@ -141,7 +141,7 @@
         <div class="col-sm-9">
             <select id="seofields-robots" class="narrow form-control pull-left">
             {% for option in ['index, follow', 'noindex, follow', 'index, nofollow', 'noindex, nofollow', 'noodp' ] %}
-                <option value="{{ option }}" {% if seovalues.meta_robots == option %}selected{% endif %}>{{ option }}</option>
+                <option value="{{ option }}" {% if seovalues.robots == option %}selected{% endif %}>{{ option }}</option>
             {% endfor %}
             </select>
         </div>
@@ -188,7 +188,7 @@
                   var description = $('#' + this.descriptionfield).val();
                 }
 
-                var link = $('#show-slug').text();
+                var link = $('#slug').text();
                 var shortlink = $('#seofields-shortlink').val();
                 var canonical = $('#seofields-canonical').val();
                 var robots = $('#seofields-robots').val();

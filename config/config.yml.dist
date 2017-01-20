@@ -17,6 +17,7 @@ fields:
     title: ['title', 'name']
     description: ['introduction', 'teaser', 'description', 'body']
     keywords: []
+    image: ['image']    
 
 # The default title and description. If these are left empty, the extension will use the
 # sitename and payoff, from the global config.yml

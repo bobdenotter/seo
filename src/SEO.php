@@ -238,35 +238,70 @@ class SEO
     }
 
     /**
+     * Find a suitable image for the OG image tag.
+     *
      * @return array|string
      */
     private function findImage()
     {
+        // If there's no record set, there's nothing to be done.
         if (empty($this->record)) {
             return '';
         }
 
-        foreach ($this->record->contenttype['fields'] as $fieldname => $field) {
-            if ($field['type'] == 'image') {
-                if (isset($this->record->values[$fieldname]['file'])) {
-                    $image = $this->record->values[$fieldname]['file'];
-                } else {
-                    $image = $this->record->values[$fieldname];
+        // First, if we've set a preference for the fields in config, check those
+        // fields for a suitable candidate.
+        if (isset($this->config['fields']['image']) && !empty($this->config['fields']['image'])) {
+            foreach ((array)$this->config['fields']['image'] as $fieldname) {
+                if (isset($this->record->contenttype['fields'][$fieldname])) {
+                    if ($image = $this->findImageHelper($fieldname)) {
+                       break;
+                    }
                 }
-                break;
-            } elseif ($field['type'] == 'imagelist') {
-                if (isset($this->record->values[$fieldname][0]['filename'])) {
-                    $image = $this->record->values[$fieldname][0]['filename'];
+            }
+        }
+
+        // Otherwise, iterate over the available fields, until we've found the
+        // first image.
+        if (empty($image)) {
+            foreach ($this->record->contenttype['fields'] as $fieldname => $field) {
+                if ($image = $this->findImageHelper($fieldname)) {
+                    break;
                 }
-                break;
             }
         }
 
         if (!empty($image)) {
-            return sprintf('%sfiles/%s', $this->app['resources']->getUrl('canonicalurl'), $image);
+            return sprintf('%sfiles/%s', $this->app['resources']->getUrl('rooturl'), $image);
         } else {
             return '';
         }
+    }
+
+    /**
+     * Helper function for findImage()
+     *
+     * @param string $fieldname
+     */
+    private function findImageHelper($fieldname)
+    {
+        $field = $this->record->contenttype['fields'][$fieldname];
+
+        $image = '';
+
+        if ($field['type'] == 'image') {
+            if (isset($this->record->values[$fieldname]['file'])) {
+                $image = $this->record->values[$fieldname]['file'];
+            } else {
+                $image = $this->record->values[$fieldname];
+            }
+        } elseif ($field['type'] == 'imagelist') {
+            if (isset($this->record->values[$fieldname][0]['filename'])) {
+                $image = $this->record->values[$fieldname][0]['filename'];
+            }
+        }
+
+        return $image;
     }
 
     public function setCanonical($canonical = '')

@@ -144,11 +144,9 @@ class SEO
             $title = $this->values['default']['title'] . $postfix;
         }
 
-        $title = str_replace(["\r", "\n"], '', $title);
-
         // Note: Do not trim the length. Longer lengths are not beneficial for how they are
         // shown in google, but they _are_ indexed.
-        return $title;
+        return $this->cleanUp($title);;
     }
 
     /**
@@ -168,9 +166,9 @@ class SEO
             $description = $this->values['default']['description'];
         }
 
-        $description = str_replace(["\r", "\n"], '', $description);
+        $description = $this->cleanUp($description);
 
-        return Html::trimText(strip_tags($description), $this->config['description_length']);
+        return Html::trimText($description, $this->config['description_length']);
     }
 
     /**
@@ -190,9 +188,9 @@ class SEO
             $keywords = $this->values['default']['keywords'];
         }
 
-        $keywords = str_replace(["\r", "\n"], '', $keywords);
+        $keywords = $this->cleanUp($keywords);
 
-        return Html::trimText(strip_tags($keywords), $this->config['keywords_length']);
+        return Html::trimText($keywords, $this->config['keywords_length']);
     }
 
     /**
@@ -300,4 +298,14 @@ class SEO
             }
         }
     }
+
+    private function cleanUp($string)
+    {
+        $string = strip_tags($string);
+        $string = str_replace(["\r", "\n"], '', $string);
+        $string = preg_replace('/\s+/', ' ', $string);
+
+        return $string;
+    }
+
 }

@@ -46,7 +46,7 @@
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
 {% if seovalues.robots is not defined %}
-    {% set seovalues = seovalues|merge({'meta_robots': seoconfig.meta_robots|default("index, follow")})  %}
+    {% set seovalues = seovalues|merge({'robots': seoconfig.meta_robots|default("index, follow")})  %}
 {% endif %}
 
 {#=== FIELDSET ============================================================================#}

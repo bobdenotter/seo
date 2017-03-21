@@ -338,7 +338,7 @@ class SEO
     {
         $string = strip_tags($string);
         $string = str_replace(["\r", "\n"], '', $string);
-        $string = preg_replace('/\s+/', ' ', $string);
+        $string = preg_replace('/\s+/u', ' ', $string);
 
         return $string;
     }

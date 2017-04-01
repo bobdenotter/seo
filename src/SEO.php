@@ -41,6 +41,8 @@ class SEO
      */
     public function initialize($record = null)
     {
+        $vars = [];
+
         // Make sure $record contains something sensible.
         if (empty($record)) {
             if (empty($this->record)) {
@@ -52,9 +54,11 @@ class SEO
             } else {
                 $record = $this->record;
             }
-        } elseif (!empty($vars['contenttype'])) {
+        }
+
+        if (array_key_exists('contenttype', $vars) && !empty($vars['contenttype'])) {
             $this->values['inferred']['title'] = $vars['contenttype'];
-        } elseif (!empty($vars['taxonomy'])) {
+        } elseif (array_key_exists('taxonomy', $vars) && !empty($vars['taxonomy'])) {
             $this->values['inferred']['title'] = sprintf('%s %s',
                 $this->app['translator']->trans('general.phrase.overview-for'),
                 $vars['slug']

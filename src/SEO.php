@@ -41,6 +41,8 @@ class SEO
      */
     public function initialize($record = null)
     {
+        $vars = [];
+
         // Make sure $record contains something sensible.
         if (empty($record)) {
             if (empty($this->record)) {
@@ -52,7 +54,9 @@ class SEO
             } else {
                 $record = $this->record;
             }
-        } elseif (!empty($vars['contenttype'])) {
+        }
+
+        if (!empty($vars['contenttype'])) {
             $this->values['inferred']['title'] = $vars['contenttype'];
         } elseif (!empty($vars['taxonomy'])) {
             $this->values['inferred']['title'] = sprintf('%s %s',

@@ -11,7 +11,7 @@ use Silex\Application;
 
 class SeoExtension extends SimpleExtension
 {
-    private $version = 'v0.14.1';
+    private $version = 'v0.14.2';
 
     public function registerFields()
     {

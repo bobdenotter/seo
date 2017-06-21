@@ -54,6 +54,8 @@ class SEO
             } else {
                 $record = $this->record;
             }
+        } else {
+            $this->record = $record;
         }
 
         if (!empty($vars['contenttype'])) {

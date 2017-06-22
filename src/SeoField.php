@@ -2,18 +2,15 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
-use Bolt\Storage\Field\FieldInterface;
+use Bolt\Storage\EntityManager;
+use Bolt\Storage\Field\Type\FieldTypeBase;
+use Bolt\Storage\QuerySet;
 
-class SeoField implements FieldInterface
+class SeoField extends FieldTypeBase
 {
     public function getName()
     {
         return 'seo';
-    }
-
-    public function getTemplate()
-    {
-        return '_seo_extension_field.twig';
     }
 
     public function getStorageType()
@@ -21,8 +18,17 @@ class SeoField implements FieldInterface
         return 'text';
     }
 
+    public function getTemplate()
+    {
+        return '_seo_extension_field.twig';
+    }
+
     public function getStorageOptions()
     {
-        return ['default' => null, 'notnull' => false];
+        return [
+          'default' => null,
+          'notnull' => false
+        ];
     }
 }
+

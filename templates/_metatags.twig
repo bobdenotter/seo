@@ -1,18 +1,18 @@
-{% if description is not empty %}
+{% if description|default() is not empty %}
 <meta name="description" content="{{ description }}"/>
-{% if keywords|default('') is not empty %}
+{% if keywords|default() is not empty %}
         <meta name="keywords" content="{{ keywords }}"/>
 {% endif %}
 {% endif %}
         <meta property="og:locale" content="{{ htmllang()|replace({'-': '_'}) }}" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="{{ title }}" />
-{% if description is not empty %}
+{% if description|default() is not empty %}
         <meta property="og:description" content="{{ description }}" />
 {% endif %}
         <meta property="og:url" content="{{ canonical }}" />
         <meta property="og:site_name" content="{{ app.config.get('general/sitename') }}" />
-{% if image is not empty %}
+{% if image|default() is not empty %}
         <meta property="og:image" content="{{ image }}" />
 {% endif %}
         <meta name="robots" content="{{ robots }}" />

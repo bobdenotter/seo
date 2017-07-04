@@ -296,14 +296,15 @@ class SEO
         $image = '';
 
         if ($field['type'] == 'image') {
-            if (isset($this->record->values[$fieldname]['file'])) {
-                $image = $this->record->values[$fieldname]['file'];
-            } else {
-                $image = $this->record->values[$fieldname];
+            $field = $this->record->values[$fieldname];
+            if (isset($field['file'])) {
+                $image = $field['file'];
+            } elseif (!is_array($field)) {
+                $image = $field;
             }
         } elseif ($field['type'] == 'imagelist') {
-            if (isset($this->record->values[$fieldname][0]['filename'])) {
-                $image = $this->record->values[$fieldname][0]['filename'];
+            if (isset($field[0]['filename'])) {
+                $image = $field[0]['filename'];
             }
         }
 

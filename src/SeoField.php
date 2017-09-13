@@ -2,9 +2,11 @@
 
 namespace Bolt\Extension\BobdenOtter\Seo;
 
-use Bolt\Field\FieldInterface;
+use Bolt\Storage\EntityManager;
+use Bolt\Storage\Field\Type\FieldTypeBase;
+use Bolt\Storage\QuerySet;
 
-class SeoField implements FieldInterface
+class SeoField extends FieldTypeBase
 {
     public function getName()
     {

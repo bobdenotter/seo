@@ -5,7 +5,7 @@
 {% endif %}
 {% endif %}
         <meta property="og:locale" content="{{ htmllang()|replace({'-': '_'}) }}" />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="{{ ogtype|default('website') }}" />
         <meta property="og:title" content="{{ title }}" />
 {% if description|default() is not empty %}
         <meta property="og:description" content="{{ description }}" />

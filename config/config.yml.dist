@@ -24,6 +24,7 @@ fields:
 default:
     title: ""
     description: ""
+    ogtype: "website" # default og:type value.
 
 # Control who can view the more "scary" fields
 # allow:

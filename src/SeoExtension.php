@@ -28,16 +28,12 @@ class SeoExtension extends SimpleExtension
         $seoCss = new Stylesheet();
         $seoCss->setFileName('seo.css')->setZone(Zone::BACKEND);
 
-        $underscoreJs = new JavaScript();
-        $underscoreJs->setFileName('underscore-min.js')->setZone(Zone::BACKEND)->setPriority(10);
-
-        $backboneJs = new JavaScript();
-        $backboneJs->setFileName('backbone-min.js')->setZone(Zone::BACKEND)->setPriority(15);
+        $seoJs = new JavaScript();
+        $seoJs->setFileName('seo_extension.js')->setZone(Zone::BACKEND)->setPriority(10);
 
         $assets = [
             $seoCss,
-            $backboneJs,
-            $underscoreJs,
+            $seoJs,
         ];
 
         $config = $this->getConfig();

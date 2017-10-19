@@ -152,6 +152,18 @@
     </div>
     {% endif %}
 
+    {# og:type meta #}
+    <fieldset class="form-group">
+        <label for="seofields-ogtype" class="col-sm-3 main control-label">{{__("Open Graph Type")}}:</label>
+        <div class="col-sm-9">
+            <input class="form-control narrow" id="seofields-ogtype" maxlength="255" type="text" value="{{ seovalues.ogtype|default('') }}">
+        </div>
+    </fieldset>
+
+    <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;">
+        <p>{{__('Use this to set the <tt>&lt;meta name="og:type"&gt;</tt>')}}. {{__("Leave blank for the default")}}.</p>
+    </div>
+
     <input type="hidden" name="{{name}}" id="{{key}}" value="">
 
     <script>
@@ -203,6 +215,7 @@
                     'shortlink': $('#seofields-shortlink').val(),
                     'canonical': $('#seofields-canonical').val(),
                     'robots': $('#seofields-robots').val(),
+                    'ogtype': $('#seofields-ogtype').val(),
                     'keywords': $('#seofields-keywords').val() }
 
                 $('#{{key}}').val( JSON.stringify(value) );

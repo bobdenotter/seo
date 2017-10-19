@@ -110,6 +110,12 @@ class SEO
             $this->values['default']['keywords'] = '';
         }
 
+        if (!empty($this->config['default']['ogtype'])) {
+            $this->values['default']['ogtype'] = $this->config['default']['ogtype'];
+        } else {
+            $this->values['default']['ogtype'] = '';
+        }
+
         if (!empty($this->config['meta_robots'])) {
             $this->values['default']['meta_robots'] = $this->config['meta_robots'];
         } else {
@@ -202,6 +208,28 @@ class SEO
     /**
      * @param Content $record
      *
+     * @return string
+     */
+    public function ogtype($record = null)
+    {
+        $this->initialize($record);
+
+        if (!empty($this->values['record']['ogtype'])) {
+            $ogtype = $this->values['record']['ogtype'];
+        } elseif (!empty($this->values['inferred']['ogtype'])) {
+            $ogtype = $this->values['inferred']['ogtype'];
+        } else {
+            $ogtype = $this->values['default']['ogtype'];
+        }
+
+        $ogtype = $this->cleanUp($ogtype);
+
+        return $ogtype;
+    }
+
+    /**
+     * @param Content $record
+     *
      * @return array
      */
     public function robots($record = null)
@@ -235,6 +263,7 @@ class SEO
             'image'       => $this->findImage(),
             'version'     => $this->version,
             'robots'      => $this->robots(),
+            'ogtype'      => $this->ogtype(),
             'canonical'   => $this->app['resources']->getUrl('canonicalurl'),
         ];
 

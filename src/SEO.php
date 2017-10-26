@@ -5,6 +5,7 @@ namespace Bolt\Extension\BobdenOtter\Seo;
 use Bolt\Helpers\Html;
 use Bolt\Legacy\Content;
 use Silex\Application;
+use Bolt\Storage\Field\Collection\RepeatingFieldCollection;
 
 class SEO
 {
@@ -317,23 +318,43 @@ class SEO
      * Helper function for findImage()
      *
      * @param string $fieldname
+     * @param string $field
+     * @param string $imageField
+     *
+     * @return string
      */
-    private function findImageHelper($fieldname)
+    private function findImageHelper($fieldname, $field = null, $imageField = null)
     {
-        $field = $this->record->contenttype['fields'][$fieldname];
+        if($field === null){
+            $field = $this->record->contenttype['fields'][$fieldname];
+        }
 
         $image = '';
 
         if ($field['type'] == 'image') {
-            $field = $this->record->values[$fieldname];
-            if (isset($field['file'])) {
-                $image = $field['file'];
-            } elseif (!is_array($field)) {
-                $image = $field;
+            if($imageField === null){
+                $imageField = $this->record->values[$fieldname];
+            }
+            if (isset($imageField['file'])) {
+                $image = $imageField['file'];
+            } elseif (!is_array($imageField)) {
+                $image = $imageField;
             }
         } elseif ($field['type'] == 'imagelist') {
             if (isset($field[0]['filename'])) {
                 $image = $field[0]['filename'];
+            }
+        } elseif ($field['type'] == 'repeater'){
+            // check repeating items, too
+            if($this->record->values[$fieldname] instanceof RepeatingFieldCollection){
+                foreach($this->record->values[$fieldname]->flatten() as $repeatField){
+                    $fieldArray = $repeatField->serialize();
+                    $fieldArray['type'] = $fieldArray['fieldtype']; // type matching
+                    $image = $this->findImageHelper($repeatField->getName(), $fieldArray, $repeatField->getValue());
+                    if(empty($image) === false){
+                        return $image;
+                    }
+                }
             }
         }
 

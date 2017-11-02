@@ -5,6 +5,7 @@ namespace Bolt\Extension\BobdenOtter\Seo;
 use Bolt\Helpers\Html;
 use Bolt\Legacy\Content;
 use Silex\Application;
+use Bolt\Storage\Field\Collection\RepeatingFieldCollection;
 
 class SEO
 {
@@ -80,7 +81,16 @@ class SEO
                     $this->values['inferred']['title'] = $titlefield = $record->values[$fieldname];
                 }
                 if (($descriptionfield == '') && in_array($fieldname, $this->config['fields']['description'])) {
-                    $this->values['inferred']['description'] = $descriptionfield = $record->values[$fieldname];
+                    if($record->values[$fieldname] instanceof RepeatingFieldCollection){
+                        foreach($fields = $record->values[$fieldname]->flatten() as $field){
+                            if(in_array($field->getFieldName(), $this->config['fields']['description'])){
+                                $this->values['inferred']['description'] = $descriptionfield = $field->getValue();
+                                break; // just use the first matched description
+                            }
+                        }
+                    }else{
+                        $this->values['inferred']['description'] = $descriptionfield = $record->values[$fieldname];
+                    }
                 }
             }
         }

@@ -1,5 +1,39 @@
-var $ = require('jquery');
+// var $ = require('jquery');
 var Backbone = require('backbone');
+
+var SnippetPreview = require( "yoastseo" ).SnippetPreview;
+var App = require( "yoastseo" ).App;
+
+window.onload = function() {
+	var focusKeywordField = document.getElementById( "seofields-focus-keyword" );
+	var contentField = document.getElementById( "body" );
+
+    console.log(contentField);
+
+	var snippetPreview = new SnippetPreview({
+		targetElement: document.getElementById( "snippet" )
+	});
+
+	var app = new App({
+		snippetPreview: snippetPreview,
+		targets: {
+			output: "output"
+		},
+		callbacks: {
+			getData: function() {
+				return {
+					keyword: focusKeywordField.value,
+					text: contentField.value
+				};
+			}
+		}
+	});
+
+	app.refresh();
+
+	focusKeywordField.addEventListener( 'change', app.refresh.bind( app ) );
+	contentField.addEventListener( 'change', app.refresh.bind( app ) );
+};
 
 SeoExtension = Backbone.Model.extend({
 
@@ -12,8 +46,10 @@ SeoExtension = Backbone.Model.extend({
         this.key = "#" + key;
         this.update();
 
+        that = this;
+
         $('#seofields-title, #seofields-description').on('keyup input paste', function(){
-            seoExtension.update();
+            that.update();
         })
 
     },
@@ -53,7 +89,8 @@ SeoExtension = Backbone.Model.extend({
         $(this.key).val( JSON.stringify(value) );
 
         window.clearTimeout(this.timer);
-        this.timer = window.setTimeout(function(){ seoExtension.update(); }, 3000);
+        var that = this;
+        this.timer = window.setTimeout(function(){ that.update(); }, 3000);
 
     },
 

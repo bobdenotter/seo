@@ -54,6 +54,14 @@
 
 {#=== FIELDSET ============================================================================#}
 
+    {# Focus keyword #}
+    <fieldset class="form-group">
+        <label for="seofields-focus-keyword" class="col-sm-2 main control-label">{{__("Focus Keyword")}}:</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="seofields-focus-keyword" maxlength="255" type="text" value="{{ seovalues.focuskeyword|default('') }}">
+        </div>
+    </fieldset>
+
     {# Seo Title #}
     <fieldset class="form-group">
         <label for="seofields-title" class="col-sm-2 main control-label">{{__("SEO Title")}}:</label>
@@ -109,6 +117,14 @@
     </div>
     </fieldset>
 
+<<<<<<< HEAD
+=======
+    <hr>
+        <div id="output">output goes here</div>
+    <hr>
+
+    {% if seoconfig.allowed.shortlink|default(true) %}
+>>>>>>> 06d0559... Introducing YoastSEO.js
     {# Shortlink #}
     <fieldset class="form-group"{% if not show.shortlink %} hidden{% endif %}>
         <label for="seofields-shortlink" class="col-sm-3 main control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
@@ -170,5 +186,9 @@
     });
     </script>
 
+
+    <hr>
+        <div id="snippet">snippet goes here</div>
+    <hr>
 
 

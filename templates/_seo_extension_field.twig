@@ -54,14 +54,6 @@
 
 {#=== FIELDSET ============================================================================#}
 
-    {# Focus keyword #}
-    <fieldset class="form-group">
-        <label for="seofields-focus-keyword" class="col-sm-2 main control-label">{{__("Focus Keyword")}}:</label>
-        <div class="col-sm-10">
-            <input class="form-control" id="seofields-focus-keyword" maxlength="255" type="text" value="{{ seovalues.focuskeyword|default('') }}">
-        </div>
-    </fieldset>
-
     {# Seo Title #}
     <fieldset class="form-group">
         <label for="seofields-title" class="col-sm-2 main control-label">{{__("SEO Title")}}:</label>
@@ -107,7 +99,7 @@
     {# Seo Google Snippet Preview #}
     <fieldset class="form-group">
     <div class="col-sm-12 snippet-preview">
-        <label class="main control-label">{{__("Google snippet preview")}}:</label>
+        <label class="main control-label"><h3>{{__("Google snippet preview")}}:</h3></label>
         <div id="seosnippet">
             <span class="title">{{__("Bolt SEO Extension")}}</span>
             <cite>...</cite>
@@ -117,25 +109,39 @@
     </div>
     </fieldset>
 
-<<<<<<< HEAD
-=======
     <hr>
         <div id="output">output goes here</div>
     <hr>
 
-    {% if seoconfig.allowed.shortlink|default(true) %}
->>>>>>> 06d0559... Introducing YoastSEO.js
-    {# Shortlink #}
-    <fieldset class="form-group"{% if not show.shortlink %} hidden{% endif %}>
-        <label for="seofields-shortlink" class="col-sm-3 main control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
+    {# Focus keyword #}
+    <fieldset class="form-group">
+        <label for="seofields-focus-keyword" class="col-sm-3 main control-label">{{__("Focus Keyword")}}:</label>
         <div class="col-sm-9">
-            <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
+            <input class="form-control narrow" id="seofields-focus-keyword" maxlength="40" type="text" value="{{ seovalues.focuskeyword|default('') }}">
         </div>
     </fieldset>
 
-    <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;"{% if not show.shortlink %} hidden{% endif %}>
-        <p>{{__("Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>")}}.</p>
+    {# Yoast SEO Analysis output #}
+    <fieldset class="form-group">
+    <div class="col-sm-12 snippet-preview">
+        <label class="main control-label"><h3>{{__("SEO analysis")}}:</h3></label>
+        <div id="output"></div>
     </div>
+    </fieldset>
+
+    {% if seoconfig.allowed.shortlink|default(true) %}
+        {# Shortlink #}
+        <fieldset class="form-group"{% if not show.shortlink %} hidden{% endif %}>
+            <label for="seofields-shortlink" class="col-sm-3 main control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
+            <div class="col-sm-9">
+                <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
+            </div>
+        </fieldset>
+
+        <div class="postfix" style="margin-top: 8px; margin-bottom: 24px;"{% if not show.shortlink %} hidden{% endif %}>
+            <p>{{__("Use this to create an alias or shortlink to this record. Be sure to make it an absolute link, starting with a <tt>/</tt>")}}.</p>
+        </div>
+    {% endif %}
 
     {# Canonical link #}
     <fieldset class="form-group"{% if not show.canonical %} hidden{% endif %}>

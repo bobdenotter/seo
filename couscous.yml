@@ -1,0 +1,9 @@
+template:
+    url: https://github.com/CouscousPHP/Template-Light.git
+    index: README.md
+
+branch: gh-pages
+baseUrl: https://bobdenotter.github.io/seo
+
+title: Bolt SEO extension
+subTitle: Optimize your Bolt sites for Search Engines

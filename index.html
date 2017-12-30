@@ -35,17 +35,17 @@
 indexing of your Bolt website in a number of ways. It does this by:</p>
 <ul>
 <li>Allowing you to specify the SEO title and meta-description for your pages.</li>
-<li>Adding meta tags to your HTML to facilitate indexing of your pages using meta tags and
-OG tags.</li>
+<li>Adding meta tags to your HTML to facilitate indexing of your pages using meta
+tags and OG tags.</li>
 <li>Override the canonical, if you really want to.</li>
 <li>Set the <code>&lt;meta name="robots"&gt;</code>-tag.</li>
 </ul>
 <h2 id="setup">Setup</h2>
-<p>To use this extension, you should add a field to your contenttypes, and add the tags to
-the header of your HMTL templates.</p>
-<p>In your contenttypes, you should add a single <code>seo</code> field. The extenion will use this to
-store the data for the different fields that show in the backend when editing a record.
-Simply add it to your fields like this;</p>
+<p>To use this extension, you should add a field to your contenttypes, and add the
+tags to the header of your HMTL templates.</p>
+<p>In your contenttypes, you should add a single <code>seo</code> field. The extenion will
+use this to store the data for the different fields that show in the backend
+when editing a record. Simply add it to your fields like this;</p>
 <pre><code class="language-yaml"> pages:
     name: Pages
     singular_name: Page
@@ -54,29 +54,31 @@ Simply add it to your fields like this;</p>
         seo:
             type: seo
             group: "SEO settings"</code></pre>
-<p>You can assign the fields their own tab, using the <code>group: 'SEO settings'</code>, to keep them
-organised in the backend.</p>
+<p>You can assign the fields their own tab, using the <code>group: 'SEO settings'</code>, to
+keep them organised in the backend.</p>
 <p>After you've done this, it will look like this in the Bolt backend:</p>
-<p><img src="https://cloud.githubusercontent.com/assets/1833361/7018887/2a4a4f64-dd0a-11e4-9486-697f8e058d6b.png" alt="screen shot 2015-04-07 at 09 40 29" /></p>
-<p>To add the SEO title and Meta tags to your HTML, edit your templates (the 'master' or
-'header') to have the following:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/1833361/7018887/2a4a4f64-dd0a-11e4-9486-697f8e058d6b.png" alt="" /></p>
+<p>To add the SEO title and Meta tags to your HTML, edit your templates (the
+'master' or 'header') to have the following:</p>
 <pre><code class="language-HTML">    &lt;title&gt;{{ seo.title() }}&lt;/title&gt;
     {{ seo.metatags() }}</code></pre>
-<p>When you've done this, all pages that make use of these templates will automatically have
-the correct <code>&lt;title&gt;</code> tag and the meta- and OG-tags.</p>
+<p>When you've done this, all pages that make use of these templates will
+automatically have the correct <code>&lt;title&gt;</code> tag and the meta- and OG-tags.</p>
 <h3 id="configure-the-meta-tags-output">Configure the 'meta tags' output</h3>
-<p>By default, the output of the meta-tags is defined in the file <code>extensions/vendor/bobdenotter/seo/twig/_metatags.twig</code>.
-If you'd like to configure this output, you shouldn't edit this file directly. If you
-do, changes will be overwritten on subsequent updates of this extension.
-Instead, in <code>/app/config/extensions/seo.bobdenotter.yml</code> uncomment the following lines:</p>
+<p>By default, the output of the meta-tags is defined in the file
+<code>extensions/vendor/bobdenotter/seo/twig/_metatags.twig</code>. If you'd like to
+configure this output, you shouldn't edit this file directly. If you do,
+changes will be overwritten on subsequent updates of this extension. Instead,
+in <code>/app/config/extensions/seo.bobdenotter.yml</code> uncomment the following lines:</p>
 <pre><code class="language-yaml">templates:
     meta: _metatags.twig</code></pre>
-<p>Next, copy the file <code>_metatags.twig</code> to your theme folder, and the extension will pick it up
-from there.</p>
-<p><strong>Note:</strong> This is a new extension, so the functionality is still pretty bare bones. What's there
-works well, but there is probably a lot of functionality to add, to improve search engine
-indexing. If you'd like to contribute, or have a good idea, feel free to open an issue on
-the tracker at the <a href="https://github.com/bobdenotter/seo/issues">SEO Extension repository</a> on Github.</p>
+<p>Next, copy the file <code>_metatags.twig</code> to your theme folder, and the extension
+will pick it up from there.</p>
+<p><strong>Note:</strong> This is a new extension, so the functionality is still pretty bare
+bones. What's there works well, but there is probably a lot of functionality to
+add, to improve search engine indexing. If you'd like to contribute, or have a
+good idea, feel free to open an issue on the tracker at the
+<a href="https://github.com/bobdenotter/seo/issues">SEO Extension repository</a> on Github.</p>
                 </section>
 
             </div>

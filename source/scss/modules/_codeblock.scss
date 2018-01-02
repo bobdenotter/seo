@@ -1,0 +1,44 @@
+//((=== Code Block  ===))//
+
+.codeblock{
+    @include my(4);
+    box-shadow: $box-shadow;
+    border-radius: $radius;
+    &__header{
+        @include px(3);
+        text-align: right;
+        position: relative;
+        height: 40px;
+        width: 100%;
+        background: $brand-dark;
+        border-radius: $radius $radius 0 0;
+    }
+    &__code{
+        border-radius: 0 0 $radius $radius; 
+    }
+}
+
+.copy-code{
+    height: 100%;
+    color: $white;
+    display: inline-flex;
+    align-items: center;
+    &[aria-label]{
+        &:after {
+            font-family: $family-monospace;
+            content: attr(aria-label);
+            display: none;
+            position: absolute;
+            bottom: 0;
+            right: 50px;
+            line-height: 40px;
+            white-space: nowrap;
+        }
+        &:hover:after, &:focus:after {
+            display: block;
+        }
+    }
+    &:hover{
+        color: $white-ter;
+    }
+}

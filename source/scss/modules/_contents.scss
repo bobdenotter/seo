@@ -1,0 +1,13 @@
+//((=== Contents Menu  ===))//
+
+.contents{
+    @include my(4);
+    border-left: solid 2px $primary;
+    display: inline-block;
+    &--link{
+        a{
+            @include p(2, 3);
+            display: block;
+        }
+    }
+}

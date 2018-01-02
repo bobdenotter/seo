@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,31 +7,56 @@
 
         <title>Bolt SEO extension</title>
 
-        <link rel="stylesheet" href="https://bobdenotter.github.io/seo/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://bobdenotter.github.io/seo/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://bobdenotter.github.io/seo/css/highlight.dark.css">
         <link rel="stylesheet" href="https://bobdenotter.github.io/seo/css/main.css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,700" rel="stylesheet">
     </head>
     <body>
 
-        <header class="navbar navbar-default navbar-fixed-top">
-
-            <a class="navbar-brand" href="https://bobdenotter.github.io/seo/">
-                Bolt SEO extension
-                <small class="hidden-xs hidden-sm">
-                    Optimize your Bolt sites for Search Engines
-                </small>
-            </a>
-
-            
-        </header>
-
-        <main class="container">
-            <div class="row">
+        <div class="docs">
+            <aside class="docs__sidebar">
+                <div class="docs__sidebar--brand">
+                    <div class="brand">
+                        <a class="brand--text" href="https://bobdenotter.github.io/seo/">
+                            Bolt SEO extension
+                        </a>
+                    </div>
+                </div>
 
                 
-                <section id="content" class="col-sm-12">
-                    <h1 id="bolt-seo-extension">Bolt SEO extension</h1>
+                <div class="docs__sidebar--footer">
+                    <p class="text-muted">
+                        Website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                    </p>
+                </div>
+            </aside>
+            <main class="docs__main">
+                <header class="docs__main--header">
+
+                                        <div class="column is-8">
+                        <form action="https://bobdenotter.github.io/seo/search.html" class="control has-icons-right">
+                            <input class="input" type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" placeholder="Search…" required>
+                            <span class="icon is-small is-right">
+                                <i class="icon-search"></i>
+                            </span>
+                        </form>
+                    </div>
+
+                                            <a href="https://github.com/bobdenotter/seo">
+                            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                        </a>
+                    
+                </header>
+
+                <div class="docs__main--breadcrumbs">
+                    <div class="pagetitle">
+                        Optimize your Bolt sites for Search Engines
+                    </div>
+                </div>
+
+                <div class="docs__main--body">
+
+                    <section id="content" class="content">
+                        <h1 id="bolt-seo-extension">Bolt SEO extension</h1>
 <p>The Bolt SEO extension is an extension to help you improve the search engine
 indexing of your Bolt website in a number of ways. It does this by:</p>
 <ul>
@@ -79,29 +105,36 @@ bones. What's there works well, but there is probably a lot of functionality to
 add, to improve search engine indexing. If you'd like to contribute, or have a
 good idea, feel free to open an issue on the tracker at the
 <a href="https://github.com/bobdenotter/seo/issues">SEO Extension repository</a> on Github.</p>
-                </section>
+                    </section>
 
-            </div>
-        </main>
+                </div>
+            </main>
 
-        <footer>
-            <div class="container">
-                <p class="text-muted">
-                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
-                </p>
-            </div>
-        </footer>
+        </div>
 
-        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <script>
-            $(function() {
-                $("section>h1").wrap('<div class="page-header" />');
-                // Syntax highlighting
-                hljs.initHighlightingOnLoad();
+        var tipuesearch_pages = [];
+        </script>
+
+
+        <script src="https://bobdenotter.github.io/seo/tipuesearch/tipuesearch_set.js"></script>
+        <script src="https://bobdenotter.github.io/seo/tipuesearch/tipuesearch.min.js"></script>
+        <script src="https://bobdenotter.github.io/seo/js/bundle.js"></script>
+
+        <script>
+
+            hljs.initHighlightingOnLoad();
+
+            $(document).ready(function() {
+                $('#tipue_search_input').tipuesearch({
+                    'mode': 'live',
+                    'liveDescription': '#content',
+                    'liveContent': '#content'
+                });
             });
+
         </script>
 
     </body>

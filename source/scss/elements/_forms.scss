@@ -1,0 +1,7 @@
+//((===  Typography  ===))//
+
+.control{
+    input, select, textarea{
+        transition: all ease-in-out $speed;
+    }
+}

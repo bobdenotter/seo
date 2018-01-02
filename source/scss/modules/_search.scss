@@ -1,0 +1,12 @@
+//((=== Search  ===))//
+
+$search-height: 55px;
+
+.search{
+   width: 100%;
+   height: $search-height;
+   background: transparentize($grey-darker, 0.05);
+   top: $header-height;
+   position: absolute;
+   left: 0;
+}

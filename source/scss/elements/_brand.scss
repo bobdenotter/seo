@@ -1,0 +1,22 @@
+//((===  Brand  ===))//
+
+.brand{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    &--logo{
+        @include mr(2);
+        width: 45px;
+        height: 45px;
+    }
+    &--text{
+        color: $white;
+        font-size: $size-4;
+        font-weight: $weight-light;
+        text-transform: uppercase;
+        strong{
+            color: $white;
+        }
+    }
+}

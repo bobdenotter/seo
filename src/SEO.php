@@ -392,10 +392,12 @@ class SEO
                 }
                 $url = sprintf('%s%s', $paths['canonical'], $canonical);
                 $this->app['resources']->setUrl('canonicalurl', $url);
+                $this->app['canonical']->setOverride($url);
             } else {
 
                 // Absolute link, so we don't add the domain.
                 $this->app['resources']->setUrl('canonicalurl', $canonical);
+                $this->app['canonical']->setOverride($canonical);
             }
         }
     }

@@ -17,7 +17,7 @@ fields:
     title: ['title', 'name']
     description: ['introduction', 'teaser', 'description', 'body']
     keywords: []
-    image: ['image']    
+    image: ['image']
 
 # The default title and description. If these are left empty, the extension will use the
 # sitename and payoff, from the global config.yml
@@ -29,8 +29,9 @@ default:
 # Control who can view the more "scary" fields
 # allow:
 #    shortlink: [ chief-editor, admin, developer, root ]
-#    canonical: [ admin, developer, chief-editor, root ]
-#    robots: [ admin, developer, chief-editor, root ]
+#    canonical: [ chief-editor, admin, developer, root ]
+#    robots: [ chief-editor, admin, developer, root ]
+#    ogtype: [ chief-editor, admin, developer, root ]
 
 # The default option for the `<meta name="robots" />` tag. The available options are:
 # - `index, follow` - Index this page, follow the links on this page.

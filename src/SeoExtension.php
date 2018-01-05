@@ -90,9 +90,11 @@ class SeoExtension extends SimpleExtension
         $app['twig'] = $app->extend(
             'twig',
             function (\Twig_Environment $twig) use ($app) {
-                $seo = new SEO($app, $this->getConfig(), $this->version);
+                $config = $this->getConfig();
+
+                $seo = new SEO($app, $config, $this->version);
                 $twig->addGlobal('seo', $seo);
-                $twig->addGlobal('seoconfig', $this->getConfig());
+                $twig->addGlobal('seoconfig', $config);
 
                 return $twig;
             }
@@ -107,6 +109,57 @@ class SeoExtension extends SimpleExtension
         return [
             'templates' => ['position' => 'prepend', 'namespace' => 'bolt'],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerTwigFunctions()
+    {
+        return [
+            'seoAllowedConfig' => 'seoAllowedConfig',
+        ];
+    }
+
+    /**
+     * Returns an array with permissions whether to show certain advanced fields
+     * or not for the current user.
+     *
+     * @return array
+     */
+    public function seoAllowedConfig()
+    {
+        $config = $this->getConfig();
+
+        /** @var \Bolt\Users $users */
+        $users = $this->getContainer()['users'];
+
+        $currentUser    = $users->getCurrentUser();
+        $currentUserId  = $currentUser['id'];
+
+        // A permission is `true` if:
+        // (1) the `$key` is defined and the value for `$key` is `true`, or
+        // (2) the `$key` is not defined (default)
+        $allowedConfig = [
+            'shortlink' => true,
+            'canonical' => true,
+            'robots'    => true,
+            'ogtype'    => true,
+        ];
+
+        foreach ($allowedConfig as $key => $value) {
+            if (isset($config['allow'][$key])) {
+                $allowedConfig[$key] = false;
+                foreach ($config['allow'][$key] as $role) {
+                    if ($users->hasRole($currentUserId, $role)) {
+                        $allowedConfig[$key] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $allowedConfig;
     }
 
     /**

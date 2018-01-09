@@ -1,5 +1,10 @@
+# This is the Couscous configuration file, used to generate the documentation
+# See couscous.io for details.
+
 template:
-    url: https://github.com/CouscousPHP/Template-Light.git
+    # The following assumes you have a checkout of the template folder in ../couscous-template
+    directory: ../couscous-template/public
+    # url: https://github.com/bolt/Extension-docs-template
     index: README.md
 
 branch: gh-pages
@@ -7,3 +12,7 @@ baseUrl: https://bobdenotter.github.io/seo
 
 title: Bolt SEO extension
 subTitle: Optimize your Bolt sites for Search Engines
+github:
+    user: bobdenotter
+    repo: seo
+

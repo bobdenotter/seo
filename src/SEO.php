@@ -360,14 +360,15 @@ class SEO
                     $fieldArray = $repeatField->serialize();
                     $fieldArray['type'] = $fieldArray['fieldtype']; // type matching
                     $image = $this->findImageHelper($repeatField->getName(), $fieldArray, $repeatField->getValue());
-                    if(empty($image) === false){
-                        return $image;
-                    }
                 }
             }
         }
 
-        return $image;
+        if (strlen($image) > 4) {
+            return $image;
+        } else {
+            return null;
+        }
     }
 
     public function setCanonical($canonical = '')

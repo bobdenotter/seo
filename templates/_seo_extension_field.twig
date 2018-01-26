@@ -79,6 +79,9 @@
            {{__("Limit the length to 156 characters")}}.</p>
     </div>
 
+    <input id="seofields-title-fallback" maxlength="255" type="text" value="">
+    <textarea id="seofields-content-fallback" style="height: 80px;"></textarea>
+
     {% if keywords_length > 0 %}
     {# Meta keywords, if set. #}
     <fieldset class="form-group">
@@ -109,7 +112,11 @@
     </div>
     </fieldset>
 
+    <hr>[1:]
+        <div id="snippet">snippet goes here</div>
     <hr>
+
+    <hr>[2:]
         <div id="output">output goes here</div>
     <hr>
 
@@ -120,6 +127,7 @@
             <input class="form-control narrow" id="seofields-focus-keyword" maxlength="40" type="text" value="{{ seovalues.focuskeyword|default('') }}">
         </div>
     </fieldset>
+
 
     {# Yoast SEO Analysis output #}
     <fieldset class="form-group">
@@ -192,9 +200,5 @@
     });
     </script>
 
-
-    <hr>
-        <div id="snippet">snippet goes here</div>
-    <hr>
 
 

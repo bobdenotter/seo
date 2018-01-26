@@ -1,17 +1,17 @@
 // var $ = require('jquery');
 var Backbone = require('backbone');
 
-var SnippetPreview = require( "yoastseo" ).SnippetPreview;
-var App = require( "yoastseo" ).App;
+var SnippetPreview = require("yoastseo").SnippetPreview;
+var App = require("yoastseo").App;
 
 window.onload = function() {
-	var focusKeywordField = document.getElementById( "seofields-focus-keyword" );
-	var contentField = document.getElementById( "body" );
+	var focusKeywordField = document.getElementById("seofields-focus-keyword");
+	var contentField = document.getElementById("seofields-content-fallback");
 
     console.log(contentField);
 
 	var snippetPreview = new SnippetPreview({
-		targetElement: document.getElementById( "snippet" )
+		targetElement: document.getElementById("snippet")
 	});
 
 	var app = new App({
@@ -31,8 +31,8 @@ window.onload = function() {
 
 	app.refresh();
 
-	focusKeywordField.addEventListener( 'change', app.refresh.bind( app ) );
-	contentField.addEventListener( 'change', app.refresh.bind( app ) );
+	focusKeywordField.addEventListener('change', app.refresh.bind(app));
+	contentField.addEventListener('change', app.refresh.bind(app));
 };
 
 SeoExtension = Backbone.Model.extend({
@@ -68,14 +68,20 @@ SeoExtension = Backbone.Model.extend({
             var description = $('#' + this.descriptionfield).val();
         }
 
+        // Set the fallbacks, so Yoast's
+        $('#seofields-title-fallback').val(this.strip(title));
+        $('#seofields-content-fallback')
+            .val(this.strip($('#' + this.descriptionfield).val()))
+            .trigger('change');
+
         var link = $('#slug').text();
         var shortlink = $('#seofields-shortlink').val();
         var canonical = $('#seofields-canonical').val();
         var robots = $('#seofields-robots').val();
 
-        $('#seosnippet .title').text( this.trimtext(title, 70) );
+        $('#seosnippet .title').text( this.trimtext(title, 78) );
         $('#seosnippet cite').text( this.hostname + link );
-        $('#seosnippet .excerpt').text( this.trimtext(description, 156) );
+        $('#seosnippet .excerpt').text( this.trimtext(description, 300) );
 
         var value = {
             'title': $('#seofields-title').val(),
@@ -91,6 +97,11 @@ SeoExtension = Backbone.Model.extend({
         window.clearTimeout(this.timer);
         var that = this;
         this.timer = window.setTimeout(function(){ that.update(); }, 3000);
+
+        // var Researcher = require( "yoastseo" ).Researcher;
+        // var Paper = require( "yoastseo" ).Paper;
+        // var researcher = new Researcher( new Paper( description ) );
+        // console.log( researcher.getResearch( "wordCountInText" ) );
 
     },
 

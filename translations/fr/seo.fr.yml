@@ -1,9 +1,8 @@
 "SEO Title": Titre SEO
 "Will be used as the <tt>&lt;title&gt;</tt> and in search engines": "Sera utilisé comme balise <tt>&lt;title&gt;</tt> et titre des moteurs de recherche"
-"Limit the length to 70 characters": Longueur limitée à 70 caractères
 "Meta description": Description Meta
 'Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines': 'Sera utilisé comme <tt>&lt;meta name="description"&gt;</tt> et affiché dans les moteurs de recherche'
-"Limit the length to 156 characters": Longueur limitée à 156 caractères
+"Limit the length to %s characters": Longueur limitée à %s caractères
 "Google snippet preview": Prévisualisation du Google snippet
 "Bolt SEO Extension": Extension Bolt SEO
 "Sitelink": Sitelink

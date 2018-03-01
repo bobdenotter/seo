@@ -1,9 +1,8 @@
 "SEO Title": SEO titulek
 "Will be used as the <tt>&lt;title&gt;</tt> and in search engines": "Bude použito jako <tt>&lt;title&gt;</tt> a ve vyhledávačích"
-"Limit the length to 70 characters": Omezte délku na 70 znaků
 "Meta description": Meta popisek
 'Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines': 'Bude použito jako <tt>&lt;meta name="description"&gt;</tt>, a bude se ukazovat ve vyhledávačích'
-"Limit the length to 156 characters": Omezte délku na 156 znaků
+"Limit the length to %s characters": Omezte délku na %s znaků
 "Google snippet preview": Ukázka Google snippetu
 "Bolt SEO Extension": Bolt SEO rozšíření
 "Sitelink": Odkaz stránky

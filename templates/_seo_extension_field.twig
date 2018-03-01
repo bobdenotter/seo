@@ -63,7 +63,8 @@
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px;">
-        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. {{__("Limit the length to 70 characters")}}.</p>
+        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. 
+        {{__("Limit the length to %s characters", {'%s': 70}) }}.</p>
     </div>
 
     {# Meta description #}
@@ -76,7 +77,7 @@
 
     <div class="postfix">
         <p>{{__('Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines')}}.
-           {{__("Limit the length to 350 characters")}}.</p>
+           {{__("Limit the length to %s characters", {'%s': 350}) }}.</p>
     </div>
 
     {% if keywords_length > 0 %}
@@ -90,7 +91,7 @@
 
     <div class="postfix">
         <p>{{__('Will be used as the <tt>&lt;meta name="keywords"&gt;</tt>, and will show up in <em>some</em> search engines. Use comma separated tags only')}}.
-           {{__("Limit the length to 255 characters")}}.</p>
+           {{__("Limit the length to %s characters", {'%s': 255}) }}.</p>
     </div>
     {% else %}
     <input type='hidden' id="seofields-keywords" value='{{ seovalues.keywords|default('') }}'>

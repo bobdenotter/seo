@@ -42,7 +42,7 @@
 
 {% set seovalues = context.content.get(contentkey)|default('')|json_decode|default([]) %}
 {% set title_length = seoconfig.title_length|default(70) %}
-{% set description_length = seoconfig.description_length|default(156) %}
+{% set description_length = seoconfig.description_length|default(350) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
 {% if seovalues.robots is not defined %}

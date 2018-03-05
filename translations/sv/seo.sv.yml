@@ -1,9 +1,8 @@
 "SEO Title": SEO Titel
 "Will be used as the <tt>&lt;title&gt;</tt> and in search engines": "Kommer användas som <tt>&lt;title&gt;</tt> och i sökmotorer"
-"Limit the length to 70 characters": Se till att hålla längden under 70 tecken
 "Meta description": Meta beskrivning
 'Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines': 'Kommer användas som <tt>&lt;meta name="description"&gt;</tt>, och visas som beskrivning i sökmotorer'
-"Limit the length to 156 characters": "Se till att hålla längden under 156 tecken"
+"Limit the length to %s characters": "Se till att hålla längden under %s tecken"
 "Google snippet preview": Förhandsgranskning av sökresultat
 "Bolt SEO Extension": Bolt SEO Tilägg
 "Sitelink": Länk

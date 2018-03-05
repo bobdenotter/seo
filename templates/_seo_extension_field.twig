@@ -42,7 +42,7 @@
 
 {% set seovalues = context.content.get(contentkey)|default('')|json_decode|default([]) %}
 {% set title_length = seoconfig.title_length|default(70) %}
-{% set description_length = seoconfig.description_length|default(156) %}
+{% set description_length = seoconfig.description_length|default(350) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
 {% if seovalues.robots is not defined %}
@@ -63,7 +63,8 @@
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px;">
-        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. {{__("Limit the length to 70 characters")}}.</p>
+        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. 
+        {{__("Limit the length to %s characters", {'%s': title_length}) }}.</p>
     </div>
 
     {# Meta description #}
@@ -76,7 +77,7 @@
 
     <div class="postfix">
         <p>{{__('Will be used as the <tt>&lt;meta name="description"&gt;</tt>, and will show up in search engines')}}.
-           {{__("Limit the length to 156 characters")}}.</p>
+           {{__("Limit the length to %s characters", {'%s': description_length}) }}.</p>
     </div>
 
     {% if keywords_length > 0 %}
@@ -90,7 +91,7 @@
 
     <div class="postfix">
         <p>{{__('Will be used as the <tt>&lt;meta name="keywords"&gt;</tt>, and will show up in <em>some</em> search engines. Use comma separated tags only')}}.
-           {{__("Limit the length to 255 characters")}}.</p>
+           {{__("Limit the length to %s characters", {'%s': keywords_length}) }}.</p>
     </div>
     {% else %}
     <input type='hidden' id="seofields-keywords" value='{{ seovalues.keywords|default('') }}'>
@@ -202,9 +203,9 @@
                 var canonical = $('#seofields-canonical').val();
                 var robots = $('#seofields-robots').val();
 
-                $('#seosnippet .title').text( this.trimtext(title, {{70}}) );
+                $('#seosnippet .title').text( this.trimtext(title, {{ title_length }}) );
                 $('#seosnippet cite').text( this.hostname + link );
-                $('#seosnippet .excerpt').text( this.trimtext(description, 156) );
+                $('#seosnippet .excerpt').text( this.trimtext(description, {{ description_length }}) ); 
 
                 var value = {
                     'title': $('#seofields-title').val(),

@@ -21,7 +21,7 @@ use this to store the data for the different fields that show in the backend
 when editing a record. Simply add it to your fields like this;
 
 ```yaml
- pages:
+pages:
     name: Pages
     singular_name: Page
     fields:

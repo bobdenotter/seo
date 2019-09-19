@@ -42,7 +42,7 @@
 
 {% set seovalues = context.content.get(contentkey)|default('')|json_decode|default([]) %}
 {% set title_length = seoconfig.title_length|default(70) %}
-{% set description_length = seoconfig.description_length|default(350) %}
+{% set description_length = seoconfig.description_length|default(158) %}
 {% set keywords_length = seoconfig.keywords_length|default(0) %}
 
 {% if seovalues.robots is not defined %}
@@ -63,7 +63,7 @@
     </fieldset>
 
     <div class="postfix" style="margin-top: 8px;">
-        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}. 
+        <p>{{__("Will be used as the <tt>&lt;title&gt;</tt> and in search engines")}}.
         {{__("Limit the length to %s characters", {'%s': title_length}) }}.</p>
     </div>
 
@@ -205,7 +205,7 @@
 
                 $('#seosnippet .title').text( this.trimtext(title, {{ title_length }}) );
                 $('#seosnippet cite').text( this.hostname + link );
-                $('#seosnippet .excerpt').text( this.trimtext(description, {{ description_length }}) ); 
+                $('#seosnippet .excerpt').text( this.trimtext(description, {{ description_length }}) );
 
                 var value = {
                     'title': $('#seofields-title').val(),

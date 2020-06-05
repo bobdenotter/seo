@@ -15,5 +15,11 @@
 {% if image|default() is not empty %}
         <meta property="og:image" content="{{ image }}" />
 {% endif %}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="{{ title }}" />
+        <meta name="twitter:description" content="{{ description }}" />
+{% if image|default() is not empty %}
+        <meta name="twitter:image" content="{{ image }}" />
+{% endif %}
         <meta name="robots" content="{{ robots }}" />
         <!-- This site is being optimized with the Bob Bolt SEO Premium Extension™ {{ version }} Platinum Edition Pro. -->

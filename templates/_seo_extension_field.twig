@@ -114,7 +114,7 @@
     <fieldset class="form-group"{% if not show.shortlink %} hidden{% endif %}>
         <label for="seofields-shortlink" class="col-sm-3 main control-label">{{__("Shortlink")}} ({{__("alias")}}):</label>
         <div class="col-sm-9">
-            <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default('') }}">
+            <input class="form-control narrow" id="seofields-shortlink" maxlength="255" type="text" value="{{ seovalues.shortlink|default(context.content.id ? '/?p=' ~ context.content.id : '') }}">
         </div>
     </fieldset>
 

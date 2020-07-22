@@ -3,6 +3,9 @@
 {% if keywords|default() is not empty %}
         <meta name="keywords" content="{{ keywords }}"/>
 {% endif %}
+{% if shortlink %}
+        <link rel="shortlink" href="{{ app.request.getSchemeAndHttpHost() }}{{ shortlink }}" />
+{% endif %}
 {% endif %}
         <meta property="og:locale" content="{{ htmllang()|replace({'-': '_'}) }}" />
         <meta property="og:type" content="{{ ogtype|default('website') }}" />

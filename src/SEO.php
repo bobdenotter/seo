@@ -220,6 +220,26 @@ class SEO
      *
      * @return string
      */
+    public function shortlink($record = null)
+    {
+        $this->initialize($record);
+
+        if (!empty($this->values['record']['shortlink'])) {
+            $shortlink = $this->values['record']['shortlink'];
+        } else if (!empty($this->values['inferred']['shortlink'])) {
+            $shortlink = $this->values['inferred']['shortlink'];
+        } else {
+            $shortlink = $this->values['default']['shortlink'];
+        }
+
+        return $shortlink;
+    }
+
+    /**
+     * @param Content $record
+     *
+     * @return string
+     */
     public function ogtype($record = null)
     {
         $this->initialize($record);
@@ -270,6 +290,7 @@ class SEO
             'title'       => $this->title(),
             'description' => $this->description(),
             'keywords'    => $this->keywords(),
+            'shortlink'   => $this->shortlink(),
             'image'       => $this->findImage(),
             'version'     => $this->version,
             'robots'      => $this->robots(),

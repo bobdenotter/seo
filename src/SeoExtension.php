@@ -7,7 +7,9 @@ use Bolt\Asset\File\Stylesheet;
 use Bolt\Asset\Widget\Widget;
 use Bolt\Controller\Zone;
 use Bolt\Extension\SimpleExtension;
+use Bundle\Site\HomepageController;
 use Silex\Application;
+use Silex\ControllerCollection;
 
 class SeoExtension extends SimpleExtension
 {
@@ -99,6 +101,24 @@ class SeoExtension extends SimpleExtension
                 return $twig;
             }
         );
+
+        $app['controller.seo'] = $app->share(
+            function ($app) {
+                $seoController = new SeoController();
+                $seoController->connect($app);
+
+                return $seoController;
+            }
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function registerFrontendRoutes(ControllerCollection $collection)
+    {
+        $collection->match('/', [SeoController::class, 'callbackShortlinkPageId']);
+        $collection->match('/{shortlink}', [SeoController::class, 'callbackShortlink']);
     }
 
     /**
